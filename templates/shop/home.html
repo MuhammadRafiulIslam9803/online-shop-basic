@@ -1,655 +1,518 @@
-<!DOCTYPE html>
+{% extends 'shop/base.html' %}
 
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %} Shop Online BD {% endblock %}
 
-        ```
-        <title>Shop Online BD</title>
+{% block content %}
 
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        ```
+<!-- ================= HERO / CAROUSEL ================= -->
+<section class="max-w-7xl mx-auto px-4 mt-6">
 
-    </head>
+    <div class="relative overflow-hidden rounded-2xl bg-indigo-600">
 
-    <body class="bg-gray-50 text-gray-800">
+        <div class="grid md:grid-cols-2 items-center min-h-[400px]">
 
-        ```
-        <!-- ================= HEADER ================= -->
-        <header class="bg-white shadow-sm sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4">
+            <!-- Hero Text -->
+            <div class="p-8 md:p-14 text-white">
 
-                <div class="flex items-center justify-between h-16">
-
-                    <!-- Logo -->
-                    <a href="#" class="text-2xl font-bold text-indigo-600">
-                        Shop Online BD
-                    </a>
-
-                    <!-- Navigation -->
-                    <nav class="hidden md:flex items-center gap-8">
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
-                            Home
-                        </a>
-
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
-                            Products
-                        </a>
-
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
-                            Categories
-                        </a>
-
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
-                            About
-                        </a>
-
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
-                            Contact
-                        </a>
-                    </nav>
-
-                    <!-- Cart -->
-                    <div class="flex items-center gap-4">
-                        <button class="text-xl">
-                            🛒
-                        </button>
-
-                        <button
-                            class="hidden sm:block bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700">
-                            Login
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </header>
-
-        <!-- ================= HERO / CAROUSEL ================= -->
-        <section class="max-w-7xl mx-auto px-4 mt-6">
-
-            <div class="relative overflow-hidden rounded-2xl bg-indigo-600">
-
-                <div class="grid md:grid-cols-2 items-center min-h-[400px]">
-
-                    <!-- Hero Text -->
-                    <div class="p-8 md:p-14 text-white">
-
-                        <p
-                            class="uppercase tracking-widest text-indigo-200 mb-3">
-                            New Collection
-                        </p>
-
-                        <h1
-                            class="text-4xl md:text-6xl font-bold leading-tight mb-5">
-                            Style That
-                            <br>
-                            Speaks For You
-                        </h1>
-
-                        <p class="text-indigo-100 text-lg mb-8 max-w-lg">
-                            Discover the latest fashion collection for
-                            men and women at affordable prices.
-                        </p>
-
-                        <a href="#products"
-                            class="inline-block bg-white text-indigo-600 font-semibold px-7 py-3 rounded-lg hover:bg-gray-100">
-                            Shop Now
-                        </a>
-
-                    </div>
-
-                    <!-- Hero Image -->
-                    <div class="h-full min-h-[300px]">
-                        <img
-                            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
-                            alt="Fashion Collection"
-                            class="w-full h-full object-cover">
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- ================= CATEGORIES ================= -->
-        <section class="max-w-7xl mx-auto px-4 py-16">
-
-            <div class="text-center mb-10">
-                <p class="text-indigo-600 font-semibold">
-                    SHOP BY CATEGORY
+                <p
+                    class="uppercase tracking-widest text-indigo-200 mb-3">
+                    New Collection
                 </p>
 
-                <h2 class="text-3xl md:text-4xl font-bold mt-2">
-                    Explore Categories
-                </h2>
-            </div>
+                <h1
+                    class="text-4xl md:text-6xl font-bold leading-tight mb-5">
+                    Style That
+                    <br>
+                    Speaks For You
+                </h1>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-
-                <!-- Shirt -->
-                <a href="#"
-                    class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
-
-                    <div class="h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?auto=format&fit=crop&w=600&q=80"
-                            alt="Shirt"
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold text-lg">
-                            Shirts
-                        </h3>
-
-                        <p class="text-gray-500 text-sm">
-                            Explore Shirts
-                        </p>
-                    </div>
-
-                </a>
-
-                <!-- Pant -->
-                <a href="#"
-                    class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
-
-                    <div class="h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=600&q=80"
-                            alt="Pant"
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold text-lg">
-                            Pants
-                        </h3>
-
-                        <p class="text-gray-500 text-sm">
-                            Explore Pants
-                        </p>
-                    </div>
-
-                </a>
-
-                <!-- Borka -->
-                <a href="#"
-                    class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
-
-                    <div class="h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80"
-                            alt="Women's Fashion"
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold text-lg">
-                            Women's Wear
-                        </h3>
-
-                        <p class="text-gray-500 text-sm">
-                            Explore Collection
-                        </p>
-                    </div>
-
-                </a>
-
-                <!-- Panjabi -->
-                <a href="#"
-                    class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
-
-                    <div class="h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=600&q=80"
-                            alt="Men's Fashion"
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-
-                    <div class="p-4 text-center">
-                        <h3 class="font-bold text-lg">
-                            Panjabi
-                        </h3>
-
-                        <p class="text-gray-500 text-sm">
-                            Explore Panjabi
-                        </p>
-                    </div>
-
-                </a>
-
-            </div>
-
-        </section>
-
-        <!-- ================= PRODUCTS ================= -->
-        <section id="products" class="max-w-7xl mx-auto px-4 pb-16">
-
-            <div
-                class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10">
-
-                <div>
-                    <p class="text-indigo-600 font-semibold">
-                        OUR PRODUCTS
-                    </p>
-
-                    <h2 class="text-3xl md:text-4xl font-bold mt-2">
-                        Latest Products
-                    </h2>
-                </div>
-
-                <a href="#" class="text-indigo-600 font-semibold mt-4 sm:mt-0">
-                    View All →
-                </a>
-
-            </div>
-
-            <div class="mb-10">
-                <p class="text-indigo-600 font-semibold mb-5">
-                    Pants
+                <p class="text-indigo-100 text-lg mb-8 max-w-lg">
+                    Discover the latest fashion collection for
+                    men and women at affordable prices.
                 </p>
-                <div class="overflow-x-auto">
 
-                    <div class="flex gap-5 min-w-max">
+                <a href="#products"
+                    class="inline-block bg-white text-indigo-600 font-semibold px-7 py-3 rounded-lg hover:bg-gray-100">
+                    Shop Now
+                </a>
 
-                        {% for product in gentsPant %}
-
-                        <div
-                            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
-                    w-[280px] flex-shrink-0">
-
-                            <div class="relative h-64 overflow-hidden">
-
-                                <span
-                                    class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
-                                    Sale
-                                </span>
-
-                                <img
-                                    src="{{ product.image.url }}"
-                                    alt="{{ product.name }}"
-                                    class="w-full h-full object-cover hover:scale-105 transition duration-300">
-
-                            </div>
-
-                            <div class="p-4">
-
-                                <p class="text-sm text-gray-500">
-                                    Pants
-                                </p>
-
-                                <h3 class="font-semibold text-lg mt-1">
-                                    {{ product.name }}
-                                </h3>
-
-                                <div
-                                    class="flex items-center justify-between mt-4">
-
-                                    <div class="flex items-center gap-2">
-
-                                        <span
-                                            class="text-xl font-bold text-indigo-600">
-                                            ৳{{ product.discounted_price }}
-                                        </span>
-
-                                        <span
-                                            class="text-sm text-gray-400 line-through">
-                                            ৳{{ product.price }}
-                                        </span>
-
-                                    </div>
-
-                                    <button
-                                        class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
-                                        🛒
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        {% endfor %}
-
-                    </div>
-
-                </div>
             </div>
-            <div class="mb-10">
-                <p class="text-indigo-600 font-semibold mb-5">
+
+            <!-- Hero Image -->
+            <div class="h-full min-h-[300px]">
+                <img
+                    src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
+                    alt="Fashion Collection"
+                    class="w-full h-full object-cover">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+<section class="max-w-7xl mx-auto px-4 py-16">
+
+    <div class="text-center mb-10">
+        <p class="text-indigo-600 font-semibold">
+            SHOP BY CATEGORY
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-bold mt-2">
+            Explore Categories
+        </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+        <!-- Shirt -->
+        <a href="#"
+            class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+
+            <div class="h-52 overflow-hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?auto=format&fit=crop&w=600&q=80"
+                    alt="Shirt"
+                    class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+
+            <div class="p-4 text-center">
+                <h3 class="font-bold text-lg">
                     Shirts
+                </h3>
+
+                <p class="text-gray-500 text-sm">
+                    Explore Shirts
                 </p>
-                <div class="overflow-x-auto">
+            </div>
 
-                    <div class="flex gap-5 min-w-max">
+        </a>
 
-                        {% for product in shirts %}
+        <!-- Pant -->
+        <a href="#"
+            class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
 
-                        <div
-                            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
+            <div class="h-52 overflow-hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=600&q=80"
+                    alt="Pant"
+                    class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+
+            <div class="p-4 text-center">
+                <h3 class="font-bold text-lg">
+                    Pants
+                </h3>
+
+                <p class="text-gray-500 text-sm">
+                    Explore Pants
+                </p>
+            </div>
+
+        </a>
+
+        <!-- Borka -->
+        <a href="#"
+            class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+
+            <div class="h-52 overflow-hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80"
+                    alt="Women's Fashion"
+                    class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+
+            <div class="p-4 text-center">
+                <h3 class="font-bold text-lg">
+                    Women's Wear
+                </h3>
+
+                <p class="text-gray-500 text-sm">
+                    Explore Collection
+                </p>
+            </div>
+
+        </a>
+
+        <!-- Panjabi -->
+        <a href="#"
+            class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+
+            <div class="h-52 overflow-hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=600&q=80"
+                    alt="Men's Fashion"
+                    class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+
+            <div class="p-4 text-center">
+                <h3 class="font-bold text-lg">
+                    Panjabi
+                </h3>
+
+                <p class="text-gray-500 text-sm">
+                    Explore Panjabi
+                </p>
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+<section id="products" class="max-w-7xl mx-auto px-4 pb-16">
+
+    <div
+        class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10">
+
+        <div>
+            <p class="text-indigo-600 font-semibold">
+                OUR PRODUCTS
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold mt-2">
+                Latest Products
+            </h2>
+        </div>
+
+        <a href="#" class="text-indigo-600 font-semibold mt-4 sm:mt-0">
+            View All →
+        </a>
+
+    </div>
+
+    <div class="mb-10">
+        <p class="text-indigo-600 font-semibold mb-5">
+            Pants
+        </p>
+        <div class="overflow-x-auto">
+
+            <div class="flex gap-5 min-w-max">
+
+                {% for product in gentsPant %}
+
+                <a href="{% url 'productDetails' product.id %}"
+                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
                     w-[280px] flex-shrink-0">
 
-                            <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+
+                        <span
+                            class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
+                            Sale
+                        </span>
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            class="w-full h-full object-cover hover:scale-105 transition duration-300">
+
+                    </div>
+
+                    <div class="p-4">
+
+                        <p class="text-sm text-gray-500">
+                            Pants
+                        </p>
+
+                        <h3 class="font-semibold text-lg mt-1">
+                            {{ product.name }}
+                        </h3>
+
+                        <div
+                            class="flex items-center justify-between mt-4">
+
+                            <div class="flex items-center gap-2">
 
                                 <span
-                                    class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
-                                    Sale
+                                    class="text-xl font-bold text-indigo-600">
+                                    ৳{{ product.discounted_price }}
                                 </span>
 
-                                <img
-                                    src="{{ product.image.url }}"
-                                    alt="{{ product.name }}"
-                                    class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                                <span
+                                    class="text-sm text-gray-400 line-through">
+                                    ৳{{ product.price }}
+                                </span>
 
                             </div>
 
-                            <div class="p-4">
-
-                                <p class="text-sm text-gray-500">
-                                    Shirts
-                                </p>
-
-                                <h3 class="font-semibold text-lg mt-1">
-                                    {{ product.name }}
-                                </h3>
-
-                                <div
-                                    class="flex items-center justify-between mt-4">
-
-                                    <div class="flex items-center gap-2">
-
-                                        <span
-                                            class="text-xl font-bold text-indigo-600">
-                                            ৳{{ product.discounted_price }}
-                                        </span>
-
-                                        <span
-                                            class="text-sm text-gray-400 line-through">
-                                            ৳{{ product.price }}
-                                        </span>
-
-                                    </div>
-
-                                    <button
-                                        class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
-                                        🛒
-                                    </button>
-
-                                </div>
-
-                            </div>
+                            <button
+                                class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
+                                🛒
+                            </button>
 
                         </div>
 
-                        {% endfor %}
-
                     </div>
 
-                </div>
-            </div>
-            <div class="mb-10">
-                <p class="text-indigo-600 font-semibold mb-5">
-                    Shoes
-                </p>
-                <div class="overflow-x-auto">
+                </a>
 
-                    <div class="flex gap-5 min-w-max">
-
-                        {% for product in shoes %}
-
-                        <div
-                            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
-                    w-[280px] flex-shrink-0">
-
-                            <div class="relative h-64 overflow-hidden">
-
-                                <span
-                                    class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
-                                    Sale
-                                </span>
-
-                                <img
-                                    src="{{ product.image.url }}"
-                                    alt="{{ product.name }}"
-                                    class="w-full h-full object-cover hover:scale-105 transition duration-300">
-
-                            </div>
-
-                            <div class="p-4">
-
-                                <p class="text-sm text-gray-500">
-                                    Shoes
-                                </p>
-
-                                <h3 class="font-semibold text-lg mt-1">
-                                    {{ product.name }}
-                                </h3>
-
-                                <div
-                                    class="flex items-center justify-between mt-4">
-
-                                    <div class="flex items-center gap-2">
-
-                                        <span
-                                            class="text-xl font-bold text-indigo-600">
-                                            ৳{{ product.discounted_price }}
-                                        </span>
-
-                                        <span
-                                            class="text-sm text-gray-400 line-through">
-                                            ৳{{ product.price }}
-                                        </span>
-
-                                    </div>
-
-                                    <button
-                                        class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
-                                        🛒
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        {% endfor %}
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="mb-10">
-                <p class="text-indigo-600 font-semibold mb-5">
-                    Borka
-                </p>
-                <div class="overflow-x-auto">
-
-                    <div class="flex gap-5 min-w-max">
-
-                        {% for product in borka %}
-
-                        <div
-                            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
-                    w-[280px] flex-shrink-0">
-
-                            <div class="relative h-64 overflow-hidden">
-
-                                <span
-                                    class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
-                                    Sale
-                                </span>
-
-                                <img
-                                    src="{{ product.image.url }}"
-                                    alt="{{ product.name }}"
-                                    class="w-full h-full object-cover hover:scale-105 transition duration-300">
-
-                            </div>
-
-                            <div class="p-4">
-
-                                <p class="text-sm text-gray-500">
-                                    borka
-                                </p>
-
-                                <h3 class="font-semibold text-lg mt-1">
-                                    {{ product.name }}
-                                </h3>
-
-                                <div
-                                    class="flex items-center justify-between mt-4">
-
-                                    <div class="flex items-center gap-2">
-
-                                        <span
-                                            class="text-xl font-bold text-indigo-600">
-                                            ৳{{ product.discounted_price }}
-                                        </span>
-
-                                        <span
-                                            class="text-sm text-gray-400 line-through">
-                                            ৳{{ product.price }}
-                                        </span>
-
-                                    </div>
-
-                                    <button
-                                        class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
-                                        🛒
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        {% endfor %}
-
-                    </div>
-
-                </div>
-            </div>
-
-        </section>
-
-        <!-- ================= OFFER BANNER ================= -->
-        <section class="max-w-7xl mx-auto px-4 pb-16">
-
-            <div class="bg-gray-900 rounded-2xl overflow-hidden">
-
-                <div class="grid md:grid-cols-2 items-center">
-
-                    <div class="p-8 md:p-12 text-white">
-
-                        <p class="text-indigo-400 font-semibold">
-                            SPECIAL OFFER
-                        </p>
-
-                        <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">
-                            Get Up To 30% Off
-                        </h2>
-
-                        <p class="text-gray-300 mb-6">
-                            Grab your favorite products before the offer ends.
-                        </p>
-
-                        <a href="#products"
-                            class="inline-block bg-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
-                            Shop Now
-                        </a>
-
-                    </div>
-
-                    <img
-                        src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=80"
-                        alt="Special Offer"
-                        class="w-full h-72 md:h-80 object-cover">
-
-                </div>
+                {% endfor %}
 
             </div>
 
-        </section>
+        </div>
+    </div>
+    <div class="mb-10">
+        <p class="text-indigo-600 font-semibold mb-5">
+            Shirts
+        </p>
+        <div class="overflow-x-auto">
 
-        <!-- ================= FOOTER ================= -->
-        <footer class="bg-gray-900 text-gray-300">
+            <div class="flex gap-5 min-w-max">
 
-            <div class="max-w-7xl mx-auto px-4 py-12">
-
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-4">
-                            Shop Online BD
-                        </h3>
-
-                        <p class="text-gray-400">
-                            Your trusted online fashion store in Bangladesh.
-                        </p>
-                    </div>
-
-                    <div>
-                        <h3 class="font-semibold text-white mb-4">
-                            Quick Links
-                        </h3>
-
-                        <ul class="space-y-2">
-                            <li><a href="#"
-                                    class="hover:text-white">Home</a></li>
-                            <li><a href="#products"
-                                    class="hover:text-white">Products</a></li>
-                            <li><a href="#"
-                                    class="hover:text-white">Categories</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="font-semibold text-white mb-4">
-                            Categories
-                        </h3>
-
-                        <ul class="space-y-2">
-                            <li><a href="#"
-                                    class="hover:text-white">Shirts</a></li>
-                            <li><a href="#"
-                                    class="hover:text-white">Pants</a></li>
-                            <li><a href="#"
-                                    class="hover:text-white">Panjabi</a></li>
-                            <li><a href="#" class="hover:text-white">Women's
-                                    Wear</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="font-semibold text-white mb-4">
-                            Contact
-                        </h3>
-
-                        <ul class="space-y-2 text-gray-400">
-                            <li>📍 Bangladesh</li>
-                            <li>📞 +880 1XXXXXXXXX</li>
-                            <li>✉️ support@shoponlinebd.com</li>
-                        </ul>
-                    </div>
-
-                </div>
+                {% for product in shirts %}
 
                 <div
-                    class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500">
-                    © 2026 Shop Online BD. All rights reserved.
+                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
+                    w-[280px] flex-shrink-0">
+
+                    <div class="relative h-64 overflow-hidden">
+
+                        <span
+                            class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
+                            Sale
+                        </span>
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            class="w-full h-full object-cover hover:scale-105 transition duration-300">
+
+                    </div>
+
+                    <div class="p-4">
+
+                        <p class="text-sm text-gray-500">
+                            Shirts
+                        </p>
+
+                        <h3 class="font-semibold text-lg mt-1">
+                            {{ product.name }}
+                        </h3>
+
+                        <div
+                            class="flex items-center justify-between mt-4">
+
+                            <div class="flex items-center gap-2">
+
+                                <span
+                                    class="text-xl font-bold text-indigo-600">
+                                    ৳{{ product.discounted_price }}
+                                </span>
+
+                                <span
+                                    class="text-sm text-gray-400 line-through">
+                                    ৳{{ product.price }}
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
+                                🛒
+                            </button>
+
+                        </div>
+
+                    </div>
+
                 </div>
+
+                {% endfor %}
 
             </div>
 
-        </footer>
-        ```
+        </div>
+    </div>
+    <div class="mb-10">
+        <p class="text-indigo-600 font-semibold mb-5">
+            Shoes
+        </p>
+        <div class="overflow-x-auto">
 
-    </body>
-</html>
+            <div class="flex gap-5 min-w-max">
+
+                {% for product in shoes %}
+
+                <div
+                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
+                    w-[280px] flex-shrink-0">
+
+                    <div class="relative h-64 overflow-hidden">
+
+                        <span
+                            class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
+                            Sale
+                        </span>
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            class="w-full h-full object-cover hover:scale-105 transition duration-300">
+
+                    </div>
+
+                    <div class="p-4">
+
+                        <p class="text-sm text-gray-500">
+                            Shoes
+                        </p>
+
+                        <h3 class="font-semibold text-lg mt-1">
+                            {{ product.name }}
+                        </h3>
+
+                        <div
+                            class="flex items-center justify-between mt-4">
+
+                            <div class="flex items-center gap-2">
+
+                                <span
+                                    class="text-xl font-bold text-indigo-600">
+                                    ৳{{ product.discounted_price }}
+                                </span>
+
+                                <span
+                                    class="text-sm text-gray-400 line-through">
+                                    ৳{{ product.price }}
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
+                                🛒
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+    <div class="mb-10">
+        <p class="text-indigo-600 font-semibold mb-5">
+            Borka
+        </p>
+        <div class="overflow-x-auto">
+
+            <div class="flex gap-5 min-w-max">
+
+                {% for product in borka %}
+
+                <div
+                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
+                    w-[280px] flex-shrink-0">
+
+                    <div class="relative h-64 overflow-hidden">
+
+                        <span
+                            class="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full">
+                            Sale
+                        </span>
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            class="w-full h-full object-cover hover:scale-105 transition duration-300">
+
+                    </div>
+
+                    <div class="p-4">
+
+                        <p class="text-sm text-gray-500">
+                            borka
+                        </p>
+
+                        <h3 class="font-semibold text-lg mt-1">
+                            {{ product.name }}
+                        </h3>
+
+                        <div
+                            class="flex items-center justify-between mt-4">
+
+                            <div class="flex items-center gap-2">
+
+                                <span
+                                    class="text-xl font-bold text-indigo-600">
+                                    ৳{{ product.discounted_price }}
+                                </span>
+
+                                <span
+                                    class="text-sm text-gray-400 line-through">
+                                    ৳{{ product.price }}
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
+                                🛒
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- ================= OFFER BANNER ================= -->
+<section class="max-w-7xl mx-auto px-4 pb-16">
+
+    <div class="bg-gray-900 rounded-2xl overflow-hidden">
+
+        <div class="grid md:grid-cols-2 items-center">
+
+            <div class="p-8 md:p-12 text-white">
+
+                <p class="text-indigo-400 font-semibold">
+                    SPECIAL OFFER
+                </p>
+
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">
+                    Get Up To 30% Off
+                </h2>
+
+                <p class="text-gray-300 mb-6">
+                    Grab your favorite products before the offer ends.
+                </p>
+
+                <a href="#products"
+                    class="inline-block bg-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
+                    Shop Now
+                </a>
+
+            </div>
+
+            <img
+                src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=80"
+                alt="Special Offer"
+                class="w-full h-72 md:h-80 object-cover">
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
