@@ -267,7 +267,7 @@
 
                 {% for product in shirts %}
 
-                <div
+                <a href="{% url 'productDetails' product.id %}"
                     class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
                     w-[280px] flex-shrink-0">
 
@@ -321,7 +321,7 @@
 
                     </div>
 
-                </div>
+                </a>
 
                 {% endfor %}
 
@@ -339,7 +339,7 @@
 
                 {% for product in shoes %}
 
-                <div
+                <a href="{% url 'productDetails' product.id %}"
                     class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
                     w-[280px] flex-shrink-0">
 
@@ -393,7 +393,7 @@
 
                     </div>
 
-                </div>
+                </a>
 
                 {% endfor %}
 
@@ -411,7 +411,7 @@
 
                 {% for product in borka %}
 
-                <div
+                <a href="{% url 'productDetails' product.id %}"
                     class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition
                     w-[280px] flex-shrink-0">
 
@@ -465,7 +465,7 @@
 
                     </div>
 
-                </div>
+                </a>
 
                 {% endfor %}
 
