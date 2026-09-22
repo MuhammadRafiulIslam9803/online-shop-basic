@@ -22,3 +22,8 @@ class ProductDetailsView(View):
     def get(self, request, id):
         product = Product.objects.get(id=id)
         return render(request, "shop/productDetails.html", {"product": product})
+
+class categoryView(View):
+    def get(self, request, category):
+        products = Product.objects.filter(category=category)
+        return render(request, "shop/category.html", {"products": products})

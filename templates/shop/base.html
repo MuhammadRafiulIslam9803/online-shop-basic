@@ -26,7 +26,7 @@
 
                     <!-- Navigation -->
                     <nav class="hidden md:flex items-center gap-8">
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
+                        <a href="{% url 'home' %}" class="text-gray-700 hover:text-indigo-600">
                             Home
                         </a>
 
@@ -34,9 +34,40 @@
                             Products
                         </a>
 
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
-                            Categories
-                        </a>
+                        <div class="relative group">
+
+                            <button class="text-gray-700 hover:text-indigo-600">
+                                Categories ▾
+                            </button>
+
+                            <div
+                                class="absolute left-0 w-48 bg-white shadow-lg rounded-lg
+                                    invisible group-hover:visible opacity-0
+                                    group-hover:opacity-100 transition duration-200">
+
+                                <a href="{% url 'categoryProducts' 'shirt' %}"
+                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    Shirts
+                                </a>
+
+                                <a href="{% url 'categoryProducts' 'pant' %}"
+                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    Pants
+                                </a>
+
+                                <a href="{% url 'categoryProducts' 'borka' %}"
+                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    Borka
+                                </a>
+
+                                <a href="{% url 'categoryProducts' 'shoes' %}"
+                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    Shoes
+                                </a>
+
+                            </div>
+
+                        </div>
 
                         <a href="#" class="text-gray-700 hover:text-indigo-600">
                             About
@@ -45,6 +76,7 @@
                         <a href="#" class="text-gray-700 hover:text-indigo-600">
                             Contact
                         </a>
+
                     </nav>
 
                     <!-- Cart -->
