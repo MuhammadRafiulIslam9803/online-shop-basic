@@ -1,5 +1,8 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.views import View
+
+from root_app.shop.forms import CustomerRegistrationForm
 
 from .models import Product
 
@@ -27,3 +30,15 @@ class categoryView(View):
     def get(self, request, category):
         products = Product.objects.filter(category=category)
         return render(request, "shop/category.html", {"products": products})
+
+class CustomerRegistrationView(View):
+    def get(self, request):
+        form = CustomerRegistrationForm()
+        return render(request, "shop/customerregistration.html", {"form": form})
+
+    def post(self, request):
+        form = CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Congratulations! You have registered successfully.")
+        return render(request, "shop/customerregistration.html", {"form": form})
