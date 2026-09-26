@@ -27,7 +27,8 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm , AuthenticationForm , UsernameField
+from django.utils.translation import gettext, gettext_lazy as _
 
 
 class CustomerRegistrationForm(UserCreationForm):
@@ -95,3 +96,31 @@ class CustomerRegistrationForm(UserCreationForm):
             "password2",
         ]
 
+
+class LoginForm(AuthenticationForm):
+    username = UsernameField(
+        widget=forms.TextInput(attrs={
+            "autofocus": True,
+            "class": (
+                "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                "focus:border-indigo-500 transition"
+            ),
+            "placeholder": "Enter your username",
+        })
+    )
+
+    password = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={
+            "autocomplete": "current-password",
+            "class": (
+                "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                "focus:border-indigo-500 transition"
+            ),
+            "placeholder": "Enter your password",
+        }),
+    )
+    

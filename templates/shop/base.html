@@ -18,7 +18,7 @@
             <div class="max-w-7xl mx-auto px-4">
 
                 <div class="flex items-center justify-between h-16">
-
+                    {%if request.user.is_authenticated %}
                     <!-- Logo -->
                     <a href="#" class="text-2xl font-bold text-indigo-600">
                         Shop Online BD
@@ -85,13 +85,13 @@
                         <button class="text-xl">
                             🛒
                         </button>
-
+                        {% else %}
                         <a href="{% url 'login' %}"
                             class="hidden sm:block bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700">
                             Login
                         </a>
                     </div>
-
+                    {% endif %}
                 </div>
             </div>
         </header>
@@ -183,7 +183,7 @@
                 <script>
                     Swal.fire({
                         toast: true,
-                        position: 'top-end',
+                        position: 'top',
                         icon: '{{ message.tags }}',
                         title: '{{ message|escapejs }}',
                         showConfirmButton: false,

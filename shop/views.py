@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views import View
 
-from .forms import CustomerRegistrationForm
+from .forms import CustomerRegistrationForm , LoginForm
 
 from .models import Product
 
@@ -44,6 +44,5 @@ class CustomerRegistrationView(View):
             return redirect("home")
         return render(request, "shop/customerregistration.html", {"form": form})
 
-class LoginView(View):
-    def get(self, request):
-        return render(request, "shop/login.html")
+
+
