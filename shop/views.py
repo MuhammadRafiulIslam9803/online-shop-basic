@@ -1,8 +1,8 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 
-from root_app.shop.forms import CustomerRegistrationForm
+from .forms import CustomerRegistrationForm
 
 from .models import Product
 
@@ -41,4 +41,9 @@ class CustomerRegistrationView(View):
         if form.is_valid():
             form.save()
             messages.success(request, "Congratulations! You have registered successfully.")
+            return redirect("home")
         return render(request, "shop/customerregistration.html", {"form": form})
+
+class LoginView(View):
+    def get(self, request):
+        return render(request, "shop/login.html")

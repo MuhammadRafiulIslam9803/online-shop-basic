@@ -26,7 +26,8 @@
 
                     <!-- Navigation -->
                     <nav class="hidden md:flex items-center gap-8">
-                        <a href="{% url 'home' %}" class="text-gray-700 hover:text-indigo-600">
+                        <a href="{% url 'home' %}"
+                            class="text-gray-700 hover:text-indigo-600">
                             Home
                         </a>
 
@@ -85,10 +86,10 @@
                             🛒
                         </button>
 
-                        <button
+                        <a href="{% url 'login' %}"
                             class="hidden sm:block bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700">
                             Login
-                        </button>
+                        </a>
                     </div>
 
                 </div>
@@ -173,6 +174,25 @@
 
         </footer>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <!-- SweetAlert2 -->
+        {% if messages %}
+            {% for message in messages %}
+
+                <script>
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: '{{ message.tags }}',
+                        title: '{{ message|escapejs }}',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                </script>
+            {% endfor %}
+        {% endif %}
     </body>
 
 </html>

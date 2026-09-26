@@ -3,37 +3,41 @@
 {% block title %}Customer Registration - Shop Online BD{% endblock %}
 
 {% block content %}
- 
-    <div class="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">Customer Registration</h2>
-        <form method="post" novalidate>
-            {% if messages %} 
 
-                {% for message in messages %} 
-
-                {{ message }} 
-
-                {% endfor %} 
-
+<div class="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Customer Registration</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-4">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+            <ul class="text-red-500 text-sm">
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
             {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit"
+            class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">
+            Register
+        </button>
 
-            {% csrf_token %}
-            {% for field in form %}
-                <div class="mb-4">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                        <ul class="text-red-500 text-sm">
-                            {% for error in field.errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <button type="submit" class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">
-                Register
-            </button>
-        </form>
-    </div>
+        <!-- login -->
+        <div class="text-center mt-7 pt-6 border-t border-gray-100">
+
+            <p class="text-sm text-gray-600">
+                Already have an account?
+                <a href="{% url 'login' %}"
+                    class="text-blue-600 font-semibold hover:text-blue-700">
+                    Login
+                </a>
+            </p>
+
+        </div>
+    </form>
+</div>
 {% endblock %}
