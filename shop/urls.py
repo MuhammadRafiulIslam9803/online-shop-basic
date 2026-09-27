@@ -61,15 +61,12 @@ urlpatterns = [
         name="password_change_done",
     ),
     
-    # password reset urls
+    # password reset urls or forgot password urls
     path(
         "password_reset/",
         auth_views.PasswordResetView.as_view(
             template_name="shop/password_reset.html",
             form_class=MyPasswordResetForm,
-            email_template_name="shop/password_reset_email.html",
-            subject_template_name="shop/password_reset_subject.txt",
-            success_url="/password_reset/done/",
         ),
         name="password_reset",
     ),
@@ -85,7 +82,6 @@ urlpatterns = [
         auth_views.PasswordResetConfirmView.as_view(
             template_name="shop/password_reset_confirm.html",
             form_class=MySetPasswordForm,
-            success_url="/reset/done/",
         ),
         name="password_reset_confirm",
     ),

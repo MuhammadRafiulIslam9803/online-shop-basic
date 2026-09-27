@@ -1,4 +1,5 @@
 from django import forms
+
 # from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import (
@@ -6,11 +7,14 @@ from django.contrib.auth.forms import (
     UserCreationForm,
     AuthenticationForm,
     UsernameField,
+    PasswordResetForm,
+    SetPasswordForm,
 )
 from django.utils.translation import gettext, gettext_lazy as _
 
 
 # registration form
+
 
 class CustomerRegistrationForm(UserCreationForm):
     username = forms.CharField(
@@ -87,6 +91,7 @@ class CustomerRegistrationForm(UserCreationForm):
 
 # login form
 
+
 class LoginForm(AuthenticationForm):
     username = UsernameField(
         widget=forms.TextInput(
@@ -118,7 +123,9 @@ class LoginForm(AuthenticationForm):
         ),
     )
 
+
 # password change form
+
 
 class MyPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(
@@ -167,17 +174,19 @@ class MyPasswordChangeForm(PasswordChangeForm):
             }
         ),
     )
-    
+
+
 # password reset form
 
-class MyPasswordResetForm(PasswordChangeForm):
+
+class MyPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(
         label=_("Email"),
         required=True,
         widget=forms.EmailInput(
             attrs={
                 "class": (
-                    "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                    "w-full px-4 pl-10 py-3 border border-gray-300 rounded-lg "
                     "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
                     "focus:border-indigo-500 transition"
                 ),
@@ -186,7 +195,9 @@ class MyPasswordResetForm(PasswordChangeForm):
             }
         ),
     )
-class MySetPasswordForm(PasswordChangeForm):
+
+
+class MySetPasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(
         label=_("New Password"),
         strip=False,
@@ -202,6 +213,7 @@ class MySetPasswordForm(PasswordChangeForm):
             }
         ),
     )
+
     new_password2 = forms.CharField(
         label=_("Confirm New Password"),
         strip=False,
