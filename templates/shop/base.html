@@ -7,114 +7,154 @@
 
         <title>{% block title %}Shop Online BD{% endblock %}</title>
 
+        <!-- Tailwind CSS -->
         <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     </head>
 
     <body class="bg-gray-50 text-gray-800">
 
         <!-- HEADER -->
-
         <header class="bg-white shadow-sm sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-4">
 
                 <div class="flex items-center justify-between h-16">
-                    {%if request.user.is_authenticated %}
+
                     <!-- Logo -->
-                    <a href="#" class="text-2xl font-bold text-indigo-600">
+                    <a href="{% url 'home' %}"
+                        class="text-2xl font-bold text-indigo-600">
                         Shop Online BD
                     </a>
 
+                    {% if request.user.is_authenticated %}
+
                     <!-- Navigation -->
                     <nav class="hidden md:flex items-center gap-8">
+
+                        <!-- Home -->
                         <a href="{% url 'home' %}"
-                            class="text-gray-700 hover:text-indigo-600">
+                            class="flex items-center gap-2 text-gray-700 hover:text-indigo-600">
+                            <i class="fa-solid fa-house"></i>
                             Home
                         </a>
 
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
+                        <!-- Products -->
+                        <a href="#"
+                            class="flex items-center gap-2 text-gray-700 hover:text-indigo-600">
+                            <i class="fa-solid fa-box-open"></i>
                             Products
                         </a>
 
+                        <!-- Categories -->
                         <div class="relative group">
 
-                            <button class="text-gray-700 hover:text-indigo-600">
-                                Categories ▾
+                            <button
+                                class="text-gray-700 hover:text-indigo-600 flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group"></i>
+                                Categories
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
                             </button>
 
                             <div
-                                class="absolute left-0 w-48 bg-white shadow-lg rounded-lg
-                                    invisible group-hover:visible opacity-0
-                                    group-hover:opacity-100 transition duration-200">
+                                class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg
+                        invisible opacity-0
+                        group-hover:visible group-hover:opacity-100
+                        transition-all duration-200">
 
                                 <a href="{% url 'categoryProducts' 'shirt' %}"
-                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
+                                    <i class="fa-solid fa-shirt w-5"></i>
                                     Shirts
                                 </a>
 
                                 <a href="{% url 'categoryProducts' 'pant' %}"
-                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
+                                    <i class="fa-solid fa-person w-5"></i>
                                     Pants
                                 </a>
 
                                 <a href="{% url 'categoryProducts' 'borka' %}"
-                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
+                                    <i class="fa-solid fa-person-dress w-5"></i>
                                     Borka
                                 </a>
 
                                 <a href="{% url 'categoryProducts' 'shoes' %}"
-                                    class="block px-4 py-3 hover:bg-gray-100">
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
+                                    <i class="fa-solid fa-shoe-prints w-5"></i>
                                     Shoes
                                 </a>
 
                             </div>
-
                         </div>
+
+                        <!-- Profile -->
                         <div class="relative group">
 
-                            <button class="text-gray-700 hover:text-indigo-600">
-                                Profile ▾
+                            <button
+                                class="text-gray-700 hover:text-indigo-600 flex items-center gap-2">
+
+                                <i class="fa-regular fa-user"></i>
+                                Profile
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+
                             </button>
 
                             <div
-                                class="absolute left-0 w-48 bg-white shadow-lg rounded-lg
-                                    invisible group-hover:visible opacity-0
-                                    group-hover:opacity-100 transition duration-200">
+                                class="absolute left-0 mt-2 w-52 bg-white shadow-lg rounded-lg
+                        overflow-hidden
+                        invisible opacity-0
+                        group-hover:visible group-hover:opacity-100
+                        transition-all duration-200">
 
-                                <a href="{% url 'categoryProducts' 'shirt' %}"
-                                    class="block px-4 py-3 hover:bg-gray-100">
+                                <!-- Profile -->
+                                <a href="#"
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
+                                    <i class="fa-regular fa-user w-5"></i>
                                     Profile
                                 </a>
 
-                                <a href="{% url 'categoryProducts' 'pant' %}"
-                                    class="block px-4 py-3 hover:bg-gray-100">
+                                <!-- Change Password -->
+                                <a href="#"
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
+                                    <i class="fa-solid fa-key w-5"></i>
                                     Change Password
                                 </a>
 
-                                <a 
-                                href="#"
-                                    class="block px-4 py-3 hover:bg-gray-100 flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="w-5 h-5">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3h-9" />
-                                    </svg>
+                                <!-- Logout -->
+                                <form action="{% url 'logout' %}" method="post">
 
-                                    <span>Logout</span>
-                                </a>
+                                    {% csrf_token %}
+
+                                    <button type="submit"
+                                        class="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 text-left">
+
+                                        <i
+                                            class="fa-solid fa-right-from-bracket w-5"></i>
+
+                                        <span>Logout</span>
+
+                                    </button>
+
+                                </form>
+
                             </div>
-
                         </div>
 
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
+                        <!-- About -->
+                        <a href="#"
+                            class="flex items-center gap-2 text-gray-700 hover:text-indigo-600">
+                            <i class="fa-solid fa-circle-info"></i>
                             About
                         </a>
 
-                        <a href="#" class="text-gray-700 hover:text-indigo-600">
+                        <!-- Contact -->
+                        <a href="#"
+                            class="flex items-center gap-2 text-gray-700 hover:text-indigo-600">
+                            <i class="fa-solid fa-phone"></i>
                             Contact
                         </a>
 
@@ -122,16 +162,33 @@
 
                     <!-- Cart -->
                     <div class="flex items-center gap-4">
-                        <button class="text-xl">
-                            🛒
+
+                        <button
+                            class="text-xl text-gray-700 hover:text-indigo-600"
+                            title="Shopping Cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
                         </button>
-                        {% else %}
-                        <a href="{% url 'login' %}"
-                            class="hidden sm:block bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700">
-                            Login
-                        </a>
+
                     </div>
+
+                    {% else %}
+
+                    <!-- Login -->
+                    <div class="flex items-center">
+
+                        <a href="{% url 'login' %}"
+                            class="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2 rounded-lg
+                    hover:bg-indigo-700 transition">
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Login
+
+                        </a>
+
+                    </div>
+
                     {% endif %}
+
                 </div>
             </div>
         </header>
@@ -149,7 +206,9 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 
+                    <!-- About -->
                     <div>
+
                         <h3 class="text-xl font-bold text-white mb-4">
                             Shop Online BD
                         </h3>
@@ -157,82 +216,149 @@
                         <p class="text-gray-400">
                             Your trusted online fashion store in Bangladesh.
                         </p>
+
                     </div>
 
+                    <!-- Quick Links -->
                     <div>
+
                         <h3 class="font-semibold text-white mb-4">
                             Quick Links
                         </h3>
 
                         <ul class="space-y-2">
-                            <li><a href="{% url 'home' %}"
-                                    class="hover:text-white">Home</a></li>
-                            <li><a href="#products"
-                                    class="hover:text-white">Products</a></li>
-                            <li><a href="#"
-                                    class="hover:text-white">Categories</a></li>
+
+                            <li>
+                                <a href="{% url 'home' %}"
+                                    class="hover:text-white">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#products"
+                                    class="hover:text-white">
+                                    Products
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#"
+                                    class="hover:text-white">
+                                    Categories
+                                </a>
+                            </li>
+
                         </ul>
+
                     </div>
 
+                    <!-- Categories -->
                     <div>
+
                         <h3 class="font-semibold text-white mb-4">
                             Categories
                         </h3>
 
                         <ul class="space-y-2">
-                            <li><a href="#"
-                                    class="hover:text-white">Shirts</a></li>
-                            <li><a href="#"
-                                    class="hover:text-white">Pants</a></li>
-                            <li><a href="#"
-                                    class="hover:text-white">Panjabi</a></li>
-                            <li><a href="#" class="hover:text-white">Women's
-                                    Wear</a></li>
+
+                            <li>
+                                <a href="{% url 'categoryProducts' 'shirt' %}"
+                                    class="hover:text-white">
+                                    Shirts
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'categoryProducts' 'pant' %}"
+                                    class="hover:text-white">
+                                    Pants
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'categoryProducts' 'borka' %}"
+                                    class="hover:text-white">
+                                    Borka
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'categoryProducts' 'shoes' %}"
+                                    class="hover:text-white">
+                                    Shoes
+                                </a>
+                            </li>
+
                         </ul>
+
                     </div>
 
+                    <!-- Contact -->
                     <div>
+
                         <h3 class="font-semibold text-white mb-4">
                             Contact
                         </h3>
 
                         <ul class="space-y-2 text-gray-400">
-                            <li>📍 Bangladesh</li>
-                            <li>📞 +880 1XXXXXXXXX</li>
-                            <li>✉️ support@shoponlinebd.com</li>
+
+                            <li>
+                                <i class="fa-solid fa-location-dot mr-2"></i>
+                                Bangladesh
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-phone mr-2"></i>
+                                +880 1XXXXXXXXX
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-envelope mr-2"></i>
+                                support@shoponlinebd.com
+                            </li>
+
                         </ul>
+
                     </div>
 
                 </div>
 
+                <!-- Copyright -->
                 <div
                     class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500">
+
                     © 2026 Shop Online BD. All rights reserved.
+
                 </div>
 
             </div>
 
         </footer>
 
+        <!-- SweetAlert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <!-- SweetAlert2 -->
         {% if messages %}
+
         {% for message in messages %}
 
         <script>
-                    Swal.fire({
-                        toast: true,
-                        position: 'top',
-                        icon: '{{ message.tags }}',
-                        title: '{{ message|escapejs }}',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true
-                    });
-                </script>
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    icon: '{{ message.tags }}',
+                    title: '{{ message|escapejs }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            </script>
+
         {% endfor %}
+
         {% endif %}
+
     </body>
 
 </html>

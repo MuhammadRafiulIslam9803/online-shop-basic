@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views import View
 
-from .forms import CustomerRegistrationForm , LoginForm
+from .forms import CustomerRegistrationForm, LoginForm
+from django.contrib.auth.views import LogoutView
 
 from .models import Product
 
@@ -21,15 +22,18 @@ class ProductView(View):
             {"gentsPant": gentsPant, "shirts": shirts, "borka": borka, "shoes": shoes},
         )
 
+
 class ProductDetailsView(View):
     def get(self, request, id):
         product = Product.objects.get(id=id)
         return render(request, "shop/productDetails.html", {"product": product})
 
+
 class categoryView(View):
     def get(self, request, category):
         products = Product.objects.filter(category=category)
         return render(request, "shop/category.html", {"products": products})
+
 
 class CustomerRegistrationView(View):
     def get(self, request):
@@ -40,9 +44,21 @@ class CustomerRegistrationView(View):
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Congratulations! You have registered successfully.")
+            messages.success(
+                request, "Congratulations! You have registered successfully."
+            )
             return redirect("home")
         return render(request, "shop/customerregistration.html", {"form": form})
 
 
+class UserLogoutView(LogoutView):
 
+    next_page = "login"
+
+    def dispatch(self, request, *args, **kwargs):
+        messages.success(
+            request,
+            "You have been logged out successfully."
+        )
+
+        return super().dispatch(request, *args, **kwargs)

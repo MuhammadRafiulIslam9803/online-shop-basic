@@ -13,6 +13,8 @@ urlpatterns = [
     path("login/", auth_views.LoginView.as_view(
         template_name="shop/login.html",
         authentication_form=LoginForm), name="login"),
-        
+     path("logout/", views.UserLogoutView.as_view(), name="logout"),
 ]
+        
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
