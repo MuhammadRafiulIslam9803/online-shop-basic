@@ -24,8 +24,8 @@
 #         labels = {"email": "Email"}
 #         widgets = {"username": forms.TextInput(attrs={"class": "form-control"})}
 
-# from django.contrib.auth import password_validation
 from django import forms
+# from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import (
     PasswordChangeForm,
@@ -150,7 +150,7 @@ class MyPasswordChangeForm(PasswordChangeForm):
                 "autocomplete": "current-password",
                 "autofocus": True,
                 "class": (
-                    "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                    "w-full px-4 pl-10 py-3 border border-gray-300 rounded-lg "
                     "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
                     "focus:border-indigo-500 transition"
                 ),
@@ -165,7 +165,7 @@ class MyPasswordChangeForm(PasswordChangeForm):
             attrs={
                 "autocomplete": "new-password",
                 "class": (
-                    "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                    "w-full px-4 pl-10 py-3 border border-gray-300 rounded-lg "
                     "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
                     "focus:border-indigo-500 transition"
                 ),
@@ -180,7 +180,55 @@ class MyPasswordChangeForm(PasswordChangeForm):
             attrs={
                 "autocomplete": "new-password",
                 "class": (
+                    "w-full px-4 pl-10 py-3 border border-gray-300 rounded-lg "
+                    "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                    "focus:border-indigo-500 transition"
+                ),
+                "placeholder": "Confirm your new password",
+            }
+        ),
+    )
+
+class MyPasswordResetForm(PasswordChangeForm):
+    email = forms.EmailField(
+        label=_("Email"),
+        required=True,
+        widget=forms.EmailInput(
+            attrs={
+                "class": (
                     "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                    "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                    "focus:border-indigo-500 transition"
+                ),
+                "placeholder": "Enter your email address",
+                "autocomplete": "email",
+            }
+        ),
+    )
+class MySetPasswordForm(PasswordChangeForm):
+    new_password1 = forms.CharField(
+        label=_("New Password"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                "autocomplete": "new-password",
+                "class": (
+                    "w-full px-4 pl-10 py-3 border border-gray-300 rounded-lg "
+                    "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                    "focus:border-indigo-500 transition"
+                ),
+                "placeholder": "Enter your new password",
+            }
+        ),
+    )
+    new_password2 = forms.CharField(
+        label=_("Confirm New Password"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                "autocomplete": "new-password",
+                "class": (
+                    "w-full px-4 pl-10 py-3 border border-gray-300 rounded-lg "
                     "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
                     "focus:border-indigo-500 transition"
                 ),
