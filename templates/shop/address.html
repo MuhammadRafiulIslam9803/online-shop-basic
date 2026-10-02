@@ -1,0 +1,177 @@
+{% extends "shop/base.html" %}
+
+{% block title %}My Address - Shop Online BD{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>My Address</title>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    </head>
+
+    <body class="bg-gray-100 min-h-screen">
+
+        <div class="max-w-3xl mx-auto px-4 py-10">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">
+                        My Address
+                    </h1>
+
+                    <p class="text-gray-500 text-sm mt-1">
+                        Your saved delivery address
+                    </p>
+                </div>
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="inline-flex items-center gap-2
+                       bg-gray-800 hover:bg-gray-900
+                       text-white px-5 py-2.5
+                       rounded-lg transition">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
+                </a>
+
+            </div>
+
+            {% if customer %}
+
+            <!-- Address Card -->
+            <div
+                class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+
+                <!-- Name -->
+                <div class="flex items-start gap-4 pb-5 border-b">
+
+                    <div class="w-11 h-11 bg-indigo-100 text-indigo-600
+                            rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Name</p>
+                        <h2 class="text-lg font-semibold text-gray-800">
+                            {{ customer.name }}
+                        </h2>
+                    </div>
+
+                </div>
+
+                <!-- Address -->
+                <div class="py-5 border-b">
+
+                    <div class="flex items-start gap-4">
+
+                        <div class="w-11 h-11 bg-indigo-100 text-indigo-600
+                                rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <div class="flex-1">
+
+                            <p class="text-sm text-gray-500 mb-1">
+                                Delivery Address
+                            </p>
+
+                            <p class="text-gray-800 leading-7">
+
+                                {{ customer.village }},
+
+                                {{ customer.thana }},
+
+                                {{ customer.district }}
+
+                                {% if customer.zipcode %}
+                                - {{ customer.zipcode }}
+                                {% endif %}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Phone -->
+                <div class="pt-5">
+
+                    <div class="flex items-start gap-4">
+
+                        <div class="w-11 h-11 bg-green-100 text-green-600
+                                rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+
+                        <div>
+
+                            <p class="text-sm text-gray-500">
+                                Phone Number
+                            </p>
+
+                            <p class="text-gray-800 font-medium mt-1">
+                                {{ customer.phone }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <!-- No Address -->
+            <div class="bg-white rounded-2xl shadow-sm border
+                    border-gray-200 p-10 text-center">
+
+                <div class="w-16 h-16 mx-auto mb-4
+                        bg-gray-100 text-gray-400
+                        rounded-full flex items-center justify-center">
+
+                    <i class="fa-solid fa-location-dot text-2xl"></i>
+
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-800">
+                    No Address Found
+                </h2>
+
+                <p class="text-gray-500 mt-2 mb-6">
+                    Please add your delivery address first.
+                </p>
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="inline-flex items-center gap-2
+                       bg-indigo-600 hover:bg-indigo-700
+                       text-white px-6 py-3
+                       rounded-lg transition">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Address
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </body>
+</html>
+{% endblock %}

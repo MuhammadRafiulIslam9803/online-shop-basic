@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,14 +26,14 @@
 
                     <!-- Logo -->
                     <a href="{% url 'home' %}"
-                        class="text-2xl font-bold text-indigo-600">
+                        class="text-xl sm:text-2xl font-bold text-indigo-600 whitespace-nowrap">
                         Shop Online BD
                     </a>
 
                     {% if request.user.is_authenticated %}
 
-                    <!-- Navigation -->
-                    <nav class="hidden md:flex items-center gap-8">
+                    <!-- ================= DESKTOP NAV ================= -->
+                    <nav class="hidden lg:flex items-center gap-6 xl:gap-8">
 
                         <!-- Home -->
                         <a href="{% url 'home' %}"
@@ -52,7 +53,7 @@
                         <div class="relative group">
 
                             <button
-                                class="text-gray-700 hover:text-indigo-600 flex items-center gap-2">
+                                class="flex items-center gap-2 text-gray-700 hover:text-indigo-600">
                                 <i class="fa-solid fa-layer-group"></i>
                                 Categories
                                 <i class="fa-solid fa-chevron-down text-xs"></i>
@@ -95,7 +96,7 @@
                         <div class="relative group">
 
                             <button
-                                class="text-gray-700 hover:text-indigo-600 flex items-center gap-2">
+                                class="flex items-center gap-2 text-gray-700 hover:text-indigo-600">
 
                                 <i class="fa-regular fa-user"></i>
                                 Profile
@@ -104,17 +105,23 @@
                             </button>
 
                             <div
-                                class="absolute left-0 mt-2 w-52 bg-white shadow-lg rounded-lg
-                        overflow-hidden
-                        invisible opacity-0
+                                class="absolute right-0 mt-2 w-52 bg-white shadow-lg rounded-lg
+                        overflow-hidden invisible opacity-0
                         group-hover:visible group-hover:opacity-100
                         transition-all duration-200">
 
                                 <!-- Profile -->
-                                <a href="#"
+                                <a href="{% url 'profile' %}"
                                     class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
                                     <i class="fa-regular fa-user w-5"></i>
                                     Profile
+                                </a>
+
+                                <!-- Address -->
+                                <a href="{% url 'address' %}"
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-100">
+                                    <i class="fa-solid fa-location-dot w-5"></i>
+                                    Address
                                 </a>
 
                                 <!-- Change Password -->
@@ -130,11 +137,11 @@
                                     {% csrf_token %}
 
                                     <button type="submit"
-                                        class="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 text-left">
+                                        class="w-full flex items-center gap-3 px-4 py-3
+                                hover:bg-gray-100 text-left">
 
                                         <i
                                             class="fa-solid fa-right-from-bracket w-5"></i>
-
                                         <span>Logout</span>
 
                                     </button>
@@ -160,36 +167,226 @@
 
                     </nav>
 
-                    <!-- Cart -->
-                    <div class="flex items-center gap-4">
+                    <!-- Desktop Cart -->
+                    <div class="hidden lg:flex items-center">
 
                         <button
                             class="text-xl text-gray-700 hover:text-indigo-600"
                             title="Shopping Cart">
+
                             <i class="fa-solid fa-cart-shopping"></i>
+
+                        </button>
+
+                    </div>
+
+                    <!-- ================= MOBILE BUTTON ================= -->
+
+                    <div class="lg:hidden flex items-center gap-4">
+
+                        <!-- Cart -->
+                        <button
+                            class="text-xl text-gray-700 hover:text-indigo-600">
+
+                            <i class="fa-solid fa-cart-shopping"></i>
+
+                        </button>
+
+                        <!-- Hamburger -->
+                        <button
+                            id="mobileMenuButton"
+                            type="button"
+                            class="text-xl text-gray-700 hover:text-indigo-600">
+
+                            <i id="menuIcon" class="fa-solid fa-bars"></i>
+
                         </button>
 
                     </div>
 
                     {% else %}
 
-                    <!-- Login -->
-                    <div class="flex items-center">
+                    <!-- Login Desktop + Mobile -->
 
-                        <a href="{% url 'login' %}"
-                            class="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2 rounded-lg
-                    hover:bg-indigo-700 transition">
+                    <a href="{% url 'login' %}"
+                        class="flex items-center gap-2 bg-indigo-600 text-white
+                px-4 sm:px-5 py-2 rounded-lg
+                hover:bg-indigo-700 transition">
 
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                            Login
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Login</span>
 
-                        </a>
-
-                    </div>
+                    </a>
 
                     {% endif %}
 
                 </div>
+
+                <!-- ================= MOBILE MENU ================= -->
+
+                {% if request.user.is_authenticated %}
+
+                <div
+                    id="mobileMenu"
+                    class="hidden lg:hidden border-t border-gray-100 py-4">
+
+                    <nav class="flex flex-col gap-1">
+
+                        <!-- Home -->
+                        <a href="{% url 'home' %}"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+
+                            <i class="fa-solid fa-house w-5"></i>
+                            Home
+
+                        </a>
+
+                        <!-- Products -->
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+
+                            <i class="fa-solid fa-box-open w-5"></i>
+                            Products
+
+                        </a>
+
+                        <!-- Categories -->
+                        <div>
+
+                            <button
+                                id="mobileCategoryButton"
+                                type="button"
+                                class="w-full flex items-center justify-between
+                        px-4 py-3 rounded-lg
+                        text-gray-700 hover:bg-gray-100">
+
+                                <span class="flex items-center gap-3">
+                                    <i class="fa-solid fa-layer-group w-5"></i>
+                                    Categories
+                                </span>
+
+                                <i id="categoryIcon"
+                                    class="fa-solid fa-chevron-down text-xs">
+                                </i>
+
+                            </button>
+
+                            <div id="mobileCategories"
+                                class="hidden pl-10 pr-4">
+
+                                <a href="{% url 'categoryProducts' 'shirt' %}"
+                                    class="flex items-center gap-3 py-3 text-gray-600 hover:text-indigo-600">
+
+                                    <i class="fa-solid fa-shirt w-5"></i>
+                                    Shirts
+
+                                </a>
+
+                                <a href="{% url 'categoryProducts' 'pant' %}"
+                                    class="flex items-center gap-3 py-3 text-gray-600 hover:text-indigo-600">
+
+                                    <i class="fa-solid fa-person w-5"></i>
+                                    Pants
+
+                                </a>
+
+                                <a href="{% url 'categoryProducts' 'borka' %}"
+                                    class="flex items-center gap-3 py-3 text-gray-600 hover:text-indigo-600">
+
+                                    <i class="fa-solid fa-person-dress w-5"></i>
+                                    Borka
+
+                                </a>
+
+                                <a href="{% url 'categoryProducts' 'shoes' %}"
+                                    class="flex items-center gap-3 py-3 text-gray-600 hover:text-indigo-600">
+
+                                    <i class="fa-solid fa-shoe-prints w-5"></i>
+                                    Shoes
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Profile -->
+                        <a href="{% url 'profile' %}"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+
+                            <i class="fa-regular fa-user w-5"></i>
+                            Profile
+
+                        </a>
+
+                        <!-- Address -->
+                        <a href="{% url 'address' %}"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+
+                            <i class="fa-solid fa-location-dot w-5"></i>
+                            Address
+
+                        </a>
+
+                        <!-- Change Password -->
+                        <a href="{% url 'password_change' %}"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+
+                            <i class="fa-solid fa-key w-5"></i>
+                            Change Password
+
+                        </a>
+
+                        <!-- About -->
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+
+                            <i class="fa-solid fa-circle-info w-5"></i>
+                            About
+
+                        </a>
+
+                        <!-- Contact -->
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+
+                            <i class="fa-solid fa-phone w-5"></i>
+                            Contact
+
+                        </a>
+
+                        <!-- Logout -->
+                        <form action="{% url 'logout' %}" method="post"
+                            class="mt-1">
+
+                            {% csrf_token %}
+
+                            <button type="submit"
+                                class="w-full flex items-center gap-3 px-4 py-3
+                        rounded-lg text-gray-700
+                        hover:bg-gray-100 text-left">
+
+                                <i
+                                    class="fa-solid fa-right-from-bracket w-5"></i>
+                                Logout
+
+                            </button>
+
+                        </form>
+
+                    </nav>
+
+                </div>
+
+                {% endif %}
+
             </div>
         </header>
 
@@ -353,12 +550,13 @@
                     timer: 3000,
                     timerProgressBar: true
                 });
-            </script>
+        </script>
 
         {% endfor %}
 
         {% endif %}
 
+        <script src="{% static 'shop/js/navbar.js' %}"></script>
     </body>
 
 </html>

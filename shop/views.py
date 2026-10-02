@@ -1,11 +1,13 @@
 from django.contrib import messages
+from django.http import request
 from django.shortcuts import redirect, render
 from django.views import View
 
 from .forms import CustomerRegistrationForm, LoginForm, CustomerProfileForm
 from django.contrib.auth.views import LogoutView
 
-from .models import Customer, Product
+from .models import Customer, Product, Cart, CartItem
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -66,24 +68,112 @@ class UserLogoutView(LogoutView):
 
 
 # Customer profile view
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin, View):
     def get(self, request):
-        form = CustomerProfileForm()
+        customer, created = Customer.objects.get_or_create(user=request.user)
+
+        form = CustomerProfileForm(instance=customer)
 
         return render(request, "shop/profile.html", {"form": form})
 
     def post(self, request):
-        form = CustomerProfileForm(request.POST)
+        customer, created = Customer.objects.get_or_create(user=request.user)
+
+        form = CustomerProfileForm(request.POST, instance=customer)
 
         if form.is_valid():
-            customer = form.save(commit=False)
-            customer.user = request.user
-            customer.save()
+            form.save()
 
-            messages.success(
-                request, "Congratulations! Your profile has been updated successfully."
-            )
+            messages.success(request, "Profile updated successfully!")
 
-            return redirect("profile")
+            return redirect("address")
 
         return render(request, "shop/profile.html", {"form": form})
+
+
+# show profile on address page
+class AddressView(View):
+    def get(self, request):
+        customer = Customer.objects.filter(user=request.user).first()
+
+        return render(request, "shop/address.html", {"customer": customer})
+
+
+# add to cart view
+class AddToCartView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        product = Product.objects.get(id=id)
+
+        cart, created = Cart.objects.get_or_create(user=request.user)
+
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+        if not created:
+            cart_item.quantity += 1
+            cart_item.save()
+
+        messages.success(request, f"{product.name} has been added to your cart.")
+
+        return redirect("cart")
+
+
+# cart view
+class CartView(LoginRequiredMixin, View):
+    def get(self, request):
+        cart, created = Cart.objects.get_or_create(user=request.user)
+
+        cart_items = cart.items.select_related("product")
+
+        total = 0
+
+        for item in cart_items:
+            price = (
+                item.product.discounted_price
+                if item.product.discounted_price
+                else item.product.price
+            )
+
+            item.subtotal = price * item.quantity
+            total += item.subtotal
+
+        return render(
+            request,
+            "shop/cart.html",
+            {
+                "cart_items": cart_items,
+                "total": total,
+            },
+        )
+
+
+# quantity remove add in cart view
+class IncreaseCartView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        cart_item = CartItem.objects.get(id=id, cart__user=request.user)
+
+        cart_item.quantity += 1
+        cart_item.save()
+
+        return redirect("cart")
+
+
+class DecreaseCartView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        cart_item = CartItem.objects.get(id=id, cart__user=request.user)
+
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+            cart_item.delete()
+
+        return redirect("cart")
+
+
+class RemoveCartView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        cart_item = CartItem.objects.get(id=id, cart__user=request.user)
+
+        cart_item.delete()
+
+        return redirect("cart")
