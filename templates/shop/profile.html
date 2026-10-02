@@ -1,0 +1,303 @@
+```html
+{% extends "shop/base.html" %}
+
+{% block title %}Profile - Shop Online BD{% endblock %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto px-4 py-10">
+
+    <!-- Profile Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <!-- Header -->
+        <div class="bg-indigo-600 px-6 py-8 text-white">
+
+            <div class="flex items-center gap-4">
+
+                <div class="w-16 h-16 bg-white/20 rounded-full
+                            flex items-center justify-center">
+
+                    <i class="fa-solid fa-user text-2xl"></i>
+
+                </div>
+
+                <div>
+                    <h1 class="text-2xl font-bold">
+                        My Profile
+                    </h1>
+
+                    <p class="text-indigo-100 mt-1">
+                        Manage your personal and delivery information
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Success Messages -->
+        {% if messages %}
+
+        <div class="px-6 pt-6">
+
+            {% for message in messages %}
+
+            <div class="flex items-center gap-3
+                                bg-green-50 border border-green-200
+                                text-green-700 px-4 py-3 rounded-lg">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <p>{{ message }}</p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        <!-- Profile Form -->
+        <div class="p-6 md:p-8">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- General Form Errors -->
+                {% if form.non_field_errors %}
+
+                <div class="mb-6 bg-red-50 border border-red-200
+                                text-red-700 rounded-lg p-4">
+
+                    {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+
+                {% endif %}
+
+                <!-- Personal Information -->
+                <div class="mb-8">
+
+                    <div class="flex items-center gap-2 mb-5">
+
+                        <i class="fa-solid fa-user text-indigo-600"></i>
+
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            Personal Information
+                        </h2>
+
+                    </div>
+
+                    <!-- Name -->
+                    <div class="mb-5">
+
+                        <label
+                            for="{{ form.name.id_for_label }}"
+                            class="block text-sm font-medium text-gray-700 mb-2">
+                            Full Name
+                        </label>
+
+                        {{ form.name }}
+
+                        {% if form.name.errors %}
+
+                        <div class="text-red-500 text-sm mt-1">
+
+                            {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Phone -->
+                    <div>
+
+                        <label
+                            for="{{ form.phone.id_for_label }}"
+                            class="block text-sm font-medium text-gray-700 mb-2">
+                            Phone Number
+                        </label>
+
+                        {{ form.phone }}
+
+                        {% if form.phone.errors %}
+
+                        <div class="text-red-500 text-sm mt-1">
+
+                            {% for error in form.phone.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- Delivery Address -->
+                <div>
+
+                    <div class="flex items-center gap-2 mb-5">
+
+                        <i class="fa-solid fa-location-dot text-indigo-600"></i>
+
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            Delivery Address
+                        </h2>
+
+                    </div>
+
+                    <!-- District & Thana -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+
+                        <!-- District -->
+                        <div>
+
+                            <label
+                                for="{{ form.district.id_for_label }}"
+                                class="block text-sm font-medium text-gray-700 mb-2">
+                                District
+                            </label>
+
+                            {{ form.district }}
+
+                            {% if form.district.errors %}
+
+                            <div class="text-red-500 text-sm mt-1">
+
+                                {% for error in form.district.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+                        <!-- Thana -->
+                        <div>
+
+                            <label
+                                for="{{ form.thana.id_for_label }}"
+                                class="block text-sm font-medium text-gray-700 mb-2">
+                                Thana
+                            </label>
+
+                            {{ form.thana }}
+
+                            {% if form.thana.errors %}
+
+                            <div class="text-red-500 text-sm mt-1">
+
+                                {% for error in form.thana.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    <!-- Village & Zipcode -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                        <!-- Village -->
+                        <div>
+
+                            <label
+                                for="{{ form.village.id_for_label }}"
+                                class="block text-sm font-medium text-gray-700 mb-2">
+                                Village / Area
+                            </label>
+
+                            {{ form.village }}
+
+                            {% if form.village.errors %}
+
+                            <div class="text-red-500 text-sm mt-1">
+
+                                {% for error in form.village.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+                        <!-- Zipcode -->
+                        <div>
+
+                            <label
+                                for="{{ form.zipcode.id_for_label }}"
+                                class="block text-sm font-medium text-gray-700 mb-2">
+                                Zip Code
+                            </label>
+
+                            {{ form.zipcode }}
+
+                            {% if form.zipcode.errors %}
+
+                            <div class="text-red-500 text-sm mt-1">
+
+                                {% for error in form.zipcode.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Save Button -->
+                <div class="mt-8 pt-6 border-t border-gray-200
+                            flex justify-end">
+
+                    <button
+                        type="submit"
+                        class="inline-flex items-center gap-2
+                               bg-indigo-600 hover:bg-indigo-700
+                               text-white font-semibold
+                               px-6 py-3 rounded-lg
+                               transition duration-200
+                               shadow-md hover:shadow-lg">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Profile
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```
