@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -24,3 +25,27 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+DISTRICT_CHOICES = [
+    ("Dhaka", "Dhaka"),
+    ("Chittagong", "Chittagong"),
+    ("Khulna", "Khulna"),
+    ("Rajshahi", "Rajshahi"),
+    ("Barisal", "Barisal"),
+    ("Sylhet", "Sylhet"),
+    ("Rangpur", "Rangpur"),
+    ("Mymensingh", "Mymensingh"),
+]
+
+
+class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    district = models.CharField(choices = DISTRICT_CHOICES , max_length=100)
+    thana = models.CharField(max_length=100)
+    zipcode = models.CharField(max_length=10)
+    phone = models.CharField(max_length=15)
+    village = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.id)

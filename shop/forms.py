@@ -1,6 +1,7 @@
 from django import forms
 
 # from django.contrib.auth import password_validation
+from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import (
     PasswordChangeForm,
@@ -158,6 +159,7 @@ class MyPasswordChangeForm(PasswordChangeForm):
                 "placeholder": "Enter your new password",
             }
         ),
+        # help_text=password_validation.password_validators_help_text_html()
     )
     new_password2 = forms.CharField(
         label=_("Confirm New Password"),
@@ -173,6 +175,7 @@ class MyPasswordChangeForm(PasswordChangeForm):
                 "placeholder": "Confirm your new password",
             }
         ),
+        # help_text=password_validation.password_validators_help_text_html()
     )
 
 
