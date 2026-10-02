@@ -1,4 +1,5 @@
 from django import forms
+from .models import Customer
 
 # from django.contrib.auth import password_validation
 from django.contrib.auth import password_validation
@@ -232,3 +233,68 @@ class MySetPasswordForm(SetPasswordForm):
             }
         ),
     )
+class CustomerProfileForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ["name", "district", "thana", "zipcode", "phone", "village"]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={
+                    "class": (
+                        "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                        "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                        "focus:border-indigo-500 transition"
+                    ),
+                    "placeholder": "Enter your name",
+                }
+            ),
+            "district": forms.Select(
+                attrs={
+                    "class": (
+                        "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                        "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                        "focus:border-indigo-500 transition"
+                    )
+                }
+            ),
+            "thana": forms.TextInput(
+                attrs={
+                    "class": (
+                        "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                        "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                        "focus:border-indigo-500 transition"
+                    ),
+                    "placeholder": "Enter your thana",
+                }
+            ),
+            "zipcode": forms.TextInput(
+                attrs={
+                    "class": (
+                        "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                        "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                        "focus:border-indigo-500 transition"
+                    ),
+                    "placeholder": "Enter your zipcode",
+                }
+            ),
+            "phone": forms.TextInput(
+                attrs={
+                    "class": (
+                        "w-full px-4 py-3 border border-gray-300 rounded-lg "
+                        "focus:outline-none focus:ring-2 focus:ring-indigo-500 "
+                        "focus:border-indigo-500 transition"
+                    ),
+                    "placeholder": "Enter your phone number",
+                }
+            ),
+            'village': forms.TextInput(
+                attrs={
+                    'class': (
+                        'w-full px-4 py-3 border border-gray-300 rounded-lg '
+                        'focus:outline-none focus:ring-2 focus:ring-indigo-500 '
+                        'focus:border-indigo-500 transition'
+                    ),
+                    'placeholder': 'Enter your village',
+                }
+            ),
+        }

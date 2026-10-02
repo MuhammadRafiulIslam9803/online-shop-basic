@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+# for my product information
+
 CATEGORY_CHOICES = [
     ("shirt", "Shirt"),
     ("pant", "Pant"),
@@ -37,7 +39,7 @@ DISTRICT_CHOICES = [
     ("Mymensingh", "Mymensingh"),
 ]
 
-
+# for customer information as profile
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
