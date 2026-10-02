@@ -5,11 +5,11 @@ from django.views import View
 from .forms import CustomerRegistrationForm, LoginForm
 from django.contrib.auth.views import LogoutView
 
-from .models import Product
+from .models import Customer, Product
 
 # Create your views here.
 
-
+# home page view
 class ProductView(View):
     def get(self, request):
         gentsPant = Product.objects.filter(category="pant")
@@ -22,19 +22,19 @@ class ProductView(View):
             {"gentsPant": gentsPant, "shirts": shirts, "borka": borka, "shoes": shoes},
         )
 
-
+# product details view
 class ProductDetailsView(View):
     def get(self, request, id):
         product = Product.objects.get(id=id)
         return render(request, "shop/productDetails.html", {"product": product})
 
-
+# category view
 class categoryView(View):
     def get(self, request, category):
         products = Product.objects.filter(category=category)
         return render(request, "shop/category.html", {"products": products})
 
-
+# customer registration view
 class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()
@@ -50,7 +50,7 @@ class CustomerRegistrationView(View):
             return redirect("home")
         return render(request, "shop/customerregistration.html", {"form": form})
 
-
+# customer logout view
 class UserLogoutView(LogoutView):
 
     next_page = "login"
@@ -62,3 +62,21 @@ class UserLogoutView(LogoutView):
         )
 
         return super().dispatch(request, *args, **kwargs)
+
+# Customer profile view
+class ProfileView(View):
+    def get(self, request):
+        form = CustomerRegistrationForm()
+        return render(request, "shop/profile.html", {"form": form})
+
+    def post(self, request):
+        form = CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            name = form.cleaned_data.get("name")
+            reg = Customer(user=user, name=name)
+            reg.save()
+            messages.success(
+                request, "Congratulations! Your profile has been updated successfully."
+            )
+        return render(request, "shop/profile.html", {"form": form})    
