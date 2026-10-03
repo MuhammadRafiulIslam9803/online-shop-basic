@@ -170,13 +170,23 @@
                     <!-- Desktop Cart -->
                     <div class="hidden lg:flex items-center">
 
-                        <button
-                            class="text-xl text-gray-700 hover:text-indigo-600"
-                            title="Shopping Cart">
+                        <a
+                            href="{% url 'cart' %}"
+                            class="relative flex items-center gap-1
+                                 text-gray-700 hover:text-indigo-600">
 
-                            <i class="fa-solid fa-cart-shopping"></i>
+                            🛒 Cart
 
-                        </button>
+                            {% if cart_count > 0 %}
+                            <span
+                                class="bg-indigo-600 text-white
+                                    text-xs font-bold
+                                    rounded-full px-2 py-0.5">
+                                {{ cart_count }}
+                            </span>
+                            {% endif %}
+
+                        </a>
 
                     </div>
 
