@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import request
+from django.http import request, JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 
@@ -148,17 +148,48 @@ class CartView(LoginRequiredMixin, View):
 
 # quantity remove add in cart view
 class IncreaseCartView(LoginRequiredMixin, View):
-    def get(self, request, id):
+    def post(self, request, id):
         cart_item = CartItem.objects.get(id=id, cart__user=request.user)
 
         cart_item.quantity += 1
         cart_item.save()
 
-        return redirect("cart")
+        price = (
+            cart_item.product.discounted_price
+            if cart_item.product.discounted_price
+            else cart_item.product.price
+        )
+
+        subtotal = price * cart_item.quantity
+
+        cart = cart_item.cart
+
+        total = 0
+
+        for item in cart.items.select_related("product"):
+            item_price = (
+                item.product.discounted_price
+                if item.product.discounted_price
+                else item.product.price
+            )
+
+            total += item_price * item.quantity
+
+        cart_count = sum(item.quantity for item in cart.items.all())
+
+        return JsonResponse(
+            {
+                "success": True,
+                "quantity": cart_item.quantity,
+                "subtotal": str(subtotal),
+                "total": str(total),
+                "cart_count": cart_count,
+            }
+        )
 
 
 class DecreaseCartView(LoginRequiredMixin, View):
-    def get(self, request, id):
+    def post(self, request, id):
         cart_item = CartItem.objects.get(id=id, cart__user=request.user)
 
         if cart_item.quantity > 1:
@@ -167,13 +198,94 @@ class DecreaseCartView(LoginRequiredMixin, View):
         else:
             cart_item.delete()
 
-        return redirect("cart")
+            cart = Cart.objects.get(user=request.user)
+
+            total = 0
+
+            for item in cart.items.select_related("product"):
+                item_price = (
+                    item.product.discounted_price
+                    if item.product.discounted_price
+                    else item.product.price
+                )
+
+                total += item_price * item.quantity
+
+            cart_count = sum(item.quantity for item in cart.items.all())
+
+            return JsonResponse(
+                {
+                    "success": True,
+                    "deleted": True,
+                    "total": str(total),
+                    "cart_count": cart_count,
+                }
+            )
+
+        price = (
+            cart_item.product.discounted_price
+            if cart_item.product.discounted_price
+            else cart_item.product.price
+        )
+
+        subtotal = price * cart_item.quantity
+
+        cart = cart_item.cart
+
+        total = 0
+
+        for item in cart.items.select_related("product"):
+            item_price = (
+                item.product.discounted_price
+                if item.product.discounted_price
+                else item.product.price
+            )
+
+            total += item_price * item.quantity
+
+        cart_count = sum(item.quantity for item in cart.items.all())
+
+        return JsonResponse(
+            {
+                "success": True,
+                "quantity": cart_item.quantity,
+                "subtotal": str(subtotal),
+                "total": str(total),
+                "cart_count": cart_count,
+            }
+        )
 
 
 class RemoveCartView(LoginRequiredMixin, View):
-    def get(self, request, id):
+    def post(self, request, id):
+
         cart_item = CartItem.objects.get(id=id, cart__user=request.user)
 
         cart_item.delete()
 
-        return redirect("cart")
+        cart = Cart.objects.get(user=request.user)
+
+        total = 0
+
+        for item in cart.items.select_related("product"):
+            item_price = (
+                item.product.discounted_price
+                if item.product.discounted_price
+                else item.product.price
+            )
+
+            total += item_price * item.quantity
+
+        cart_count = sum(item.quantity for item in cart.items.all())
+
+        return JsonResponse(
+            {
+                "success": True,
+                "deleted": True,
+                "total": str(total),
+                "cart_count": cart_count,
+            }
+        )
+
+
+# closed add to cart view

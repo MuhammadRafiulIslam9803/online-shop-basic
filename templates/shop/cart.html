@@ -24,13 +24,16 @@ My Cart - Shop Online BD
     <div class="grid lg:grid-cols-3 gap-8">
 
         <!-- Cart Items -->
-        <div class="lg:col-span-2 space-y-4">
+        <div
+            id="cart-items-container"
+            class="lg:col-span-2 space-y-4">
 
             {% for item in cart_items %}
 
-            <div class="bg-white rounded-2xl shadow-sm border
-                        p-5 flex flex-col sm:flex-row
-                        gap-5">
+            <div
+                id="cart-item-{{ item.id }}"
+                class="bg-white rounded-2xl shadow-sm border
+                       p-5 flex flex-col sm:flex-row gap-5">
 
                 <!-- Product Image -->
                 <div class="w-full sm:w-32 h-32 flex-shrink-0">
@@ -86,32 +89,47 @@ My Cart - Shop Online BD
                         <div class="flex items-center gap-2">
 
                             <!-- Decrease -->
-                            <a
-                                href="{% url 'decrease_cart' item.id %}"
+                            <button
+                                type="button"
+                                data-cart-action="decrease"
+                                data-url="{% url 'decrease_cart' item.id %}"
+                                data-item-id="{{ item.id }}"
                                 class="w-9 h-9 flex items-center justify-center
-                                    border border-gray-300 rounded-lg
-                                    hover:bg-gray-100
-                                    text-lg font-semibold">
+                                       border border-gray-300 rounded-lg
+                                       hover:bg-gray-100
+                                       text-lg font-semibold
+                                       transition">
+
                                 −
-                            </a>
+
+                            </button>
 
                             <!-- Quantity -->
                             <span
+                                id="quantity-{{ item.id }}"
                                 class="w-10 h-9 flex items-center justify-center
-                                    border border-gray-300 rounded-lg
-                                    font-semibold">
+                                       border border-gray-300 rounded-lg
+                                       font-semibold">
+
                                 {{ item.quantity }}
+
                             </span>
 
                             <!-- Increase -->
-                            <a
-                                href="{% url 'increase_cart' item.id %}"
+                            <button
+                                type="button"
+                                data-cart-action="increase"
+                                data-url="{% url 'increase_cart' item.id %}"
+                                data-item-id="{{ item.id }}"
                                 class="w-9 h-9 flex items-center justify-center
-                                    bg-indigo-600 text-white rounded-lg
-                                    hover:bg-indigo-700
-                                    text-lg font-semibold">
+                                       bg-indigo-600 text-white rounded-lg
+                                       hover:bg-indigo-700
+                                       text-lg font-semibold
+                                       transition">
+
                                 +
-                            </a>
+
+                            </button>
 
                         </div>
 
@@ -120,22 +138,35 @@ My Cart - Shop Online BD
                 </div>
 
                 <!-- Subtotal -->
-                <div class="flex sm:flex-col
-            justify-between items-end">
+                <div
+                    class="flex sm:flex-col
+                           justify-between items-end">
 
                     <p class="text-sm text-gray-500">
                         Subtotal
                     </p>
 
-                    <p class="text-xl font-bold text-gray-800">
+                    <p
+                        id="subtotal-{{ item.id }}"
+                        class="text-xl font-bold text-gray-800">
+
                         ৳{{ item.subtotal }}
+
                     </p>
 
-                    <a
-                        href="{% url 'remove_cart' item.id %}"
-                        class="text-sm text-red-500 hover:text-red-700 mt-3">
+                    <!-- Remove -->
+                    <button
+                        type="button"
+                        data-cart-action="remove"
+                        data-url="{% url 'remove_cart' item.id %}"
+                        data-item-id="{{ item.id }}"
+                        class="text-sm text-red-500
+                               hover:text-red-700 mt-3
+                               transition">
+
                         Remove
-                    </a>
+
+                    </button>
 
                 </div>
 
@@ -148,25 +179,29 @@ My Cart - Shop Online BD
         <!-- Order Summary -->
         <div>
 
-            <div class="bg-white rounded-2xl shadow-sm border p-6
-                        sticky top-6">
+            <div
+                class="bg-white rounded-2xl shadow-sm border p-6
+                       sticky top-6">
 
                 <h2 class="text-xl font-bold text-gray-800 mb-6">
                     Order Summary
                 </h2>
 
-                <div class="flex justify-between text-gray-600 mb-3">
+                <!-- Items Count -->
+                <div
+                    class="flex justify-between text-gray-600 mb-3">
 
                     <span>
                         Items
                     </span>
 
-                    <span>
+                    <span id="cart-items-count">
                         {{ cart_items|length }}
                     </span>
 
                 </div>
 
+                <!-- Total -->
                 <div class="border-t pt-4 mt-4">
 
                     <div class="flex justify-between items-center">
@@ -175,8 +210,12 @@ My Cart - Shop Online BD
                             Total
                         </span>
 
-                        <span class="text-2xl font-bold text-indigo-600">
+                        <span
+                            id="cart-total"
+                            class="text-2xl font-bold text-indigo-600">
+
                             ৳{{ total }}
+
                         </span>
 
                     </div>
@@ -217,8 +256,9 @@ My Cart - Shop Online BD
 
     <!-- Empty Cart -->
 
-    <div class="bg-white rounded-2xl shadow-sm border
-                py-20 text-center">
+    <div
+        class="bg-white rounded-2xl shadow-sm border
+               py-20 text-center">
 
         <div class="text-6xl mb-5">
             🛒

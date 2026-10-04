@@ -179,6 +179,7 @@
 
                             {% if cart_count > 0 %}
                             <span
+                                id="navbar-cart-count"
                                 class="bg-indigo-600 text-white
                                     text-xs font-bold
                                     rounded-full px-2 py-0.5">
@@ -567,6 +568,7 @@
         {% endif %}
 
         <script src="{% static 'shop/js/navbar.js' %}"></script>
+        <script src="{% static 'shop/js/cart.js' %}"></script>
     </body>
 
 </html>
