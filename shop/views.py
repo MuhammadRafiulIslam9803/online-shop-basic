@@ -6,8 +6,10 @@ from django.views import View
 from .forms import CustomerRegistrationForm, LoginForm, CustomerProfileForm
 from django.contrib.auth.views import LogoutView
 
-from .models import Customer, Product, Cart, CartItem
+from .models import Customer, Order, OrderItem, Product, Cart, CartItem
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.db import transaction
 
 # Create your views here.
 
@@ -289,3 +291,164 @@ class RemoveCartView(LoginRequiredMixin, View):
 
 
 # closed add to cart view
+
+
+# checkout view
+class CheckoutView(LoginRequiredMixin, View):
+    def get(self, request):
+
+        cart = Cart.objects.filter(user=request.user).first()
+
+        if not cart:
+            messages.warning(request, "Your cart is empty.")
+            return redirect("cart")
+
+        cart_items = cart.items.select_related("product")
+
+        if not cart_items.exists():
+            messages.warning(request, "Your cart is empty.")
+            return redirect("cart")
+
+        customer = Customer.objects.filter(user=request.user).first()
+
+        subtotal = 0
+
+        for item in cart_items:
+            price = (
+                item.product.discounted_price
+                if item.product.discounted_price
+                else item.product.price
+            )
+
+            item.subtotal = price * item.quantity
+            subtotal += item.subtotal
+
+        # shipping charge
+        # Later we will make it dynamic based on district.
+        if customer and customer.district == "Dhaka":
+            shipping_charge = 60
+        else:
+            shipping_charge = 120
+
+        total_amount = subtotal + shipping_charge
+
+        return render(
+            request,
+            "shop/checkout.html",
+            {
+                "cart_items": cart_items,
+                "customer": customer,
+                "subtotal": subtotal,
+                "shipping_charge": shipping_charge,
+                "total_amount": total_amount,
+            },
+        )
+
+
+# place order view
+class PlaceOrderView(LoginRequiredMixin, View):
+    def post(self, request):
+
+        cart = Cart.objects.filter(user=request.user).first()
+
+        if not cart:
+            messages.error(request, "Your cart is empty.")
+            return redirect("cart")
+
+        cart_items = list(cart.items.select_related("product"))
+
+        if not cart_items:
+            messages.error(request, "Your cart is empty.")
+            return redirect("cart")
+
+        customer = Customer.objects.filter(user=request.user).first()
+
+        if not customer:
+            messages.warning(
+                request, "Please complete your delivery information first."
+            )
+            return redirect("profile")
+
+        # Calculate subtotal
+        subtotal = 0
+
+        for item in cart_items:
+            price = (
+                item.product.discounted_price
+                if item.product.discounted_price
+                else item.product.price
+            )
+
+            subtotal += price * item.quantity
+
+        # Shipping charge
+        if customer.district == "Dhaka":
+            shipping_charge = 60
+        else:
+            shipping_charge = 120
+
+        total_amount = subtotal + shipping_charge
+
+        # Create order + order items together
+        with transaction.atomic():
+            order = Order.objects.create(
+                user=request.user,
+                customer=customer,
+                subtotal=subtotal,
+                shipping_charge=shipping_charge,
+                total_amount=total_amount,
+                status="pending",
+            )
+
+            for item in cart_items:
+                price = (
+                    item.product.discounted_price
+                    if item.product.discounted_price
+                    else item.product.price
+                )
+
+                item_subtotal = price * item.quantity
+
+                OrderItem.objects.create(
+                    order=order,
+                    product=item.product,
+                    quantity=item.quantity,
+                    price=price,
+                    subtotal=item_subtotal,
+                )
+
+            # Empty cart after successful order
+            cart.items.all().delete()
+
+        messages.success(request, f"Order #{order.id} placed successfully!")
+
+        return redirect("order_success", order_id=order.id)
+
+
+# order success view
+class OrderSuccessView(LoginRequiredMixin, View):
+    def get(self, request, order_id):
+
+        order = (
+            Order.objects.filter(id=order_id, user=request.user)
+            .prefetch_related("items__product")
+            .first()
+        )
+
+        if not order:
+            messages.error(request, "Order not found.")
+            return redirect("home")
+
+        return render(
+            request,
+            "shop/order_success.html",
+            {
+                "order": order,
+            },
+        )
+
+# about 
+def about(request):
+    return render(request, "shop/about.html")
+def contact(request):
+    return render(request, "shop/contact.html")

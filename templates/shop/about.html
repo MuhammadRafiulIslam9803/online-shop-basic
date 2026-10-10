@@ -1,0 +1,193 @@
+{% extends "shop/base.html" %}
+
+{% block title %}About Us - Shop Online BD{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-indigo-700 via-purple-700 to-violet-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-20 text-center">
+        <p class="text-sm font-semibold uppercase tracking-widest text-indigo-200">
+            Welcome to Shop Online BD
+        </p>
+
+        <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold">
+            About Us
+        </h1>
+
+        <p class="mt-6 max-w-2xl mx-auto text-lg leading-8 text-purple-100">
+            Your destination for convenient shopping, quality products,
+            and a better online shopping experience.
+        </p>
+
+        <a href="{% url 'home' %}"
+           class="inline-block mt-8 rounded-xl bg-white px-7 py-3 font-bold text-indigo-700 transition hover:bg-yellow-300">
+            Explore Products →
+        </a>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+        <div>
+            <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">
+                Who We Are
+            </p>
+
+            <h2 class="mt-3 text-3xl font-extrabold text-gray-900">
+                Shopping Made Simple
+            </h2>
+
+            <p class="mt-5 leading-8 text-gray-600">
+                Welcome to Shop Online BD! We aim to make online shopping
+                simple, convenient, and enjoyable for everyone.
+                Our platform brings different products together so you
+                can explore your favorite items in one place.
+            </p>
+
+            <p class="mt-4 leading-8 text-gray-600">
+                From shirts and pants to borkas, kids' clothing, shoes,
+                and other essentials, we want to help you find products
+                that match your needs.
+            </p>
+        </div>
+
+        <div class="rounded-3xl bg-gradient-to-br from-indigo-100 to-purple-100 p-10 text-center">
+            <div class="text-7xl">🛍️</div>
+
+            <h3 class="mt-6 text-2xl font-extrabold text-gray-900">
+                Shop Smart. Shop Easy.
+            </h3>
+
+            <p class="mt-4 leading-7 text-gray-600">
+                Discover your favorites and enjoy a convenient way
+                to shop online.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Mission and Vision -->
+<section class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="text-center mb-12">
+            <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">
+                Our Purpose
+            </p>
+
+            <h2 class="mt-3 text-3xl font-extrabold text-gray-900">
+                Our Mission & Vision
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="rounded-2xl bg-white border border-gray-100 p-8 shadow-sm hover:shadow-lg transition">
+                <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-indigo-100 text-2xl">
+                    🎯
+                </div>
+
+                <h3 class="mt-5 text-xl font-bold text-gray-900">
+                    Our Mission
+                </h3>
+
+                <p class="mt-3 leading-7 text-gray-600">
+                    To provide a user-friendly shopping platform with
+                    a variety of products, competitive prices, and an
+                    easy ordering experience.
+                </p>
+            </div>
+
+            <div class="rounded-2xl bg-white border border-gray-100 p-8 shadow-sm hover:shadow-lg transition">
+                <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-purple-100 text-2xl">
+                    🚀
+                </div>
+
+                <h3 class="mt-5 text-xl font-bold text-gray-900">
+                    Our Vision
+                </h3>
+
+                <p class="mt-3 leading-7 text-gray-600">
+                    To become a trusted online shopping destination
+                    where customers can discover products and enjoy
+                    a smooth shopping experience.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-gray-900">
+                Why Choose Us?
+            </h2>
+
+            <p class="mt-4 text-gray-600">
+                We focus on making your shopping experience better.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <div class="rounded-2xl border border-gray-100 p-6 text-center hover:shadow-lg transition">
+                <div class="text-4xl">✨</div>
+                <h3 class="mt-4 font-bold text-gray-900">Product Variety</h3>
+                <p class="mt-3 text-sm leading-6 text-gray-600">
+                    Explore products for different needs and preferences.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border border-gray-100 p-6 text-center hover:shadow-lg transition">
+                <div class="text-4xl">💰</div>
+                <h3 class="mt-4 font-bold text-gray-900">Affordable Shopping</h3>
+                <p class="mt-3 text-sm leading-6 text-gray-600">
+                    Find products at competitive prices.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border border-gray-100 p-6 text-center hover:shadow-lg transition">
+                <div class="text-4xl">🛒</div>
+                <h3 class="mt-4 font-bold text-gray-900">Easy Ordering</h3>
+                <p class="mt-3 text-sm leading-6 text-gray-600">
+                    Browse products and place orders conveniently.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border border-gray-100 p-6 text-center hover:shadow-lg transition">
+                <div class="text-4xl">💜</div>
+                <h3 class="mt-4 font-bold text-gray-900">Customer Focus</h3>
+                <p class="mt-3 text-sm leading-6 text-gray-600">
+                    We value customer trust and satisfaction.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="bg-indigo-700 px-4 py-14 text-center text-white">
+    <h2 class="text-3xl font-extrabold">
+        Start Your Shopping Journey
+    </h2>
+
+    <p class="mt-4 text-indigo-100">
+        Find your favorite products at Shop Online BD.
+    </p>
+
+    <a href="{% url 'home' %}"
+       class="inline-block mt-7 rounded-xl bg-yellow-300 px-7 py-3 font-bold text-gray-900 transition hover:bg-white">
+        Shop Now →
+    </a>
+</section>
+
+{% endblock %}

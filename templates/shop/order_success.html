@@ -1,0 +1,279 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+Order Successful - Shop Online BD
+{% endblock %}
+
+{% block content %}
+
+<section class="max-w-4xl mx-auto px-4 py-16">
+
+    <!-- Success Message -->
+
+    <div class="bg-white rounded-2xl shadow-sm border p-8 text-center">
+
+        <div class="text-6xl mb-5">
+            ✅
+        </div>
+
+        <h1 class="text-3xl font-bold text-gray-800">
+            Order Placed Successfully!
+        </h1>
+
+        <p class="text-gray-500 mt-3">
+            Thank you for shopping with Shop Online BD.
+        </p>
+
+        <div class="mt-5">
+
+            <span class="text-gray-500">
+                Order ID:
+            </span>
+
+            <span class="font-bold text-indigo-600">
+                #{{ order.id }}
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Order Information -->
+
+    <div class="bg-white rounded-2xl shadow-sm border p-6 mt-6">
+
+        <h2 class="text-xl font-bold text-gray-800 mb-5">
+            Order Details
+        </h2>
+
+
+        <!-- Products -->
+
+        <div class="space-y-4">
+
+            {% for item in order.items.all %}
+
+            <div
+                class="flex items-center gap-4
+                       border-b pb-4">
+
+                <!-- Image -->
+
+                {% if item.product %}
+
+                <img
+                    src="{{ item.product.image.url }}"
+                    alt="{{ item.product.name }}"
+                    class="w-16 h-16 object-cover rounded-lg">
+
+                {% endif %}
+
+
+                <!-- Product -->
+
+                <div class="flex-1">
+
+                    <h3 class="font-semibold text-gray-800">
+
+                        {% if item.product %}
+                            {{ item.product.name }}
+                        {% else %}
+                            Product no longer available
+                        {% endif %}
+
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Quantity: {{ item.quantity }}
+                    </p>
+
+                </div>
+
+
+                <!-- Price -->
+
+                <div class="text-right">
+
+                    <p class="font-semibold text-gray-800">
+                        ৳{{ item.subtotal }}
+                    </p>
+
+                    <p class="text-xs text-gray-500">
+                        ৳{{ item.price }} × {{ item.quantity }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Price Summary -->
+
+        <div class="mt-6 pt-5 border-t">
+
+            <div class="flex justify-between
+                        text-gray-600 mb-3">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span>
+                    ৳{{ order.subtotal }}
+                </span>
+
+            </div>
+
+
+            <div class="flex justify-between
+                        text-gray-600 mb-3">
+
+                <span>
+                    Shipping Charge
+                </span>
+
+                <span>
+                    ৳{{ order.shipping_charge }}
+                </span>
+
+            </div>
+
+
+            <div
+                class="flex justify-between
+                       items-center
+                       border-t pt-4 mt-4">
+
+                <span class="text-lg font-bold">
+                    Total
+                </span>
+
+                <span
+                    class="text-2xl font-bold
+                           text-indigo-600">
+
+                    ৳{{ order.total_amount }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Delivery Information -->
+
+    {% if order.customer %}
+
+    <div class="bg-white rounded-2xl shadow-sm border p-6 mt-6">
+
+        <h2 class="text-xl font-bold text-gray-800 mb-5">
+            Delivery Information
+        </h2>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+
+            <div>
+                <p class="text-sm text-gray-500">
+                    Name
+                </p>
+
+                <p class="font-medium text-gray-800">
+                    {{ order.customer.name }}
+                </p>
+            </div>
+
+
+            <div>
+                <p class="text-sm text-gray-500">
+                    Phone
+                </p>
+
+                <p class="font-medium text-gray-800">
+                    {{ order.customer.phone }}
+                </p>
+            </div>
+
+
+            <div>
+                <p class="text-sm text-gray-500">
+                    District
+                </p>
+
+                <p class="font-medium text-gray-800">
+                    {{ order.customer.district }}
+                </p>
+            </div>
+
+
+            <div>
+                <p class="text-sm text-gray-500">
+                    Thana
+                </p>
+
+                <p class="font-medium text-gray-800">
+                    {{ order.customer.thana }}
+                </p>
+            </div>
+
+
+            <div>
+                <p class="text-sm text-gray-500">
+                    Zip Code
+                </p>
+
+                <p class="font-medium text-gray-800">
+                    {{ order.customer.zipcode }}
+                </p>
+            </div>
+
+
+            <div>
+                <p class="text-sm text-gray-500">
+                    Village / Area
+                </p>
+
+                <p class="font-medium text-gray-800">
+                    {{ order.customer.village }}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- Buttons -->
+
+    <div class="flex flex-col sm:flex-row
+                justify-center gap-4 mt-8">
+
+        <a
+            href="{% url 'home' %}"
+            class="bg-indigo-600
+                   hover:bg-indigo-700
+                   text-white
+                   px-6 py-3
+                   rounded-xl
+                   font-semibold
+                   text-center
+                   transition">
+
+            Continue Shopping
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

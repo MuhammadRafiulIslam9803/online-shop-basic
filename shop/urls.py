@@ -13,6 +13,9 @@ from .forms import (
 urlpatterns = [
     # Home URL
     path("", views.ProductView.as_view(), name="home"),
+    
+    path("about/", views.about, name="about"),
+    path("contact/", views.contact, name="contact"),
     # Product URL
     path(
         "product/<int:id>/", views.ProductDetailsView.as_view(), name="productDetails"
@@ -115,6 +118,23 @@ urlpatterns = [
         "cart/<int:id>/remove/",
         views.RemoveCartView.as_view(),
         name="remove_cart",
+    ),
+    # checkout view
+    path(
+        "checkout/",
+        views.CheckoutView.as_view(),
+        name="checkout",
+    ),
+    # place order view
+    path(
+        "checkout/place-order/",
+        views.PlaceOrderView.as_view(),
+        name="place_order",
+    ),
+    path(
+        "order/<int:order_id>/success/",
+        views.OrderSuccessView.as_view(),
+        name="order_success",
     ),
 ]
 

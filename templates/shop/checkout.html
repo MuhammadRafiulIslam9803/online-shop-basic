@@ -1,0 +1,390 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+Checkout - Shop Online BD
+{% endblock %}
+
+{% block content %}
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+
+    <!-- Header -->
+    <div class="mb-8">
+
+        <h1 class="text-3xl font-bold text-gray-800">
+            Checkout
+        </h1>
+
+        <p class="text-gray-500 mt-2">
+            Complete your delivery information and review your order.
+        </p>
+
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- ========================= -->
+        <!-- Customer / Delivery Info -->
+        <!-- ========================= -->
+
+        <div class="lg:col-span-2">
+
+            <div class="bg-white rounded-2xl shadow-sm border p-6">
+
+                <h2 class="text-xl font-bold text-gray-800 mb-6">
+                    Delivery Information
+                </h2>
+
+                {% if customer %}
+
+                <div class="grid md:grid-cols-2 gap-5">
+
+                    <!-- Name -->
+                    <div>
+
+                        <label class="block text-sm font-medium
+                                      text-gray-700 mb-2">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ customer.name }}"
+                            readonly
+                            class="w-full px-4 py-3
+                                   border border-gray-300
+                                   rounded-xl bg-gray-50
+                                   text-gray-700">
+
+                    </div>
+
+                    <!-- Phone -->
+                    <div>
+
+                        <label class="block text-sm font-medium
+                                      text-gray-700 mb-2">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ customer.phone }}"
+                            readonly
+                            class="w-full px-4 py-3
+                                   border border-gray-300
+                                   rounded-xl bg-gray-50
+                                   text-gray-700">
+
+                    </div>
+
+                    <!-- District -->
+                    <div>
+
+                        <label class="block text-sm font-medium
+                                      text-gray-700 mb-2">
+                            District
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ customer.district }}"
+                            readonly
+                            class="w-full px-4 py-3
+                                   border border-gray-300
+                                   rounded-xl bg-gray-50
+                                   text-gray-700">
+
+                    </div>
+
+                    <!-- Thana -->
+                    <div>
+
+                        <label class="block text-sm font-medium
+                                      text-gray-700 mb-2">
+                            Thana
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ customer.thana }}"
+                            readonly
+                            class="w-full px-4 py-3
+                                   border border-gray-300
+                                   rounded-xl bg-gray-50
+                                   text-gray-700">
+
+                    </div>
+
+                    <!-- Zipcode -->
+                    <div>
+
+                        <label class="block text-sm font-medium
+                                      text-gray-700 mb-2">
+                            Zip Code
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ customer.zipcode }}"
+                            readonly
+                            class="w-full px-4 py-3
+                                   border border-gray-300
+                                   rounded-xl bg-gray-50
+                                   text-gray-700">
+
+                    </div>
+
+                    <!-- Village -->
+                    <div>
+
+                        <label class="block text-sm font-medium
+                                      text-gray-700 mb-2">
+                            Village / Area
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ customer.village }}"
+                            readonly
+                            class="w-full px-4 py-3
+                                   border border-gray-300
+                                   rounded-xl bg-gray-50
+                                   text-gray-700">
+
+                    </div>
+
+                </div>
+
+                <!-- Edit Profile -->
+
+                <div class="mt-6">
+
+                    <a
+                        href="{% url 'profile' %}"
+                        class="text-indigo-600
+                               hover:text-indigo-700
+                               font-medium text-sm">
+
+                        ✏️ Edit Delivery Information
+
+                    </a>
+
+                </div>
+
+                {% else %}
+
+                <!-- No Customer Profile -->
+
+                <div class="text-center py-10">
+
+                    <div class="text-5xl mb-4">
+                        📍
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800">
+                        Delivery information missing
+                    </h3>
+
+                    <p class="text-gray-500 mt-2">
+                        Please complete your profile before placing an order.
+                    </p>
+
+                    <a
+                        href="{% url 'profile' %}"
+                        class="inline-block mt-6
+                               bg-indigo-600
+                               hover:bg-indigo-700
+                               text-white
+                               px-6 py-3
+                               rounded-xl
+                               font-semibold
+                               transition">
+
+                        Add Delivery Information
+
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- Order Summary -->
+        <!-- ========================= -->
+
+        <div>
+
+            <div
+                class="bg-white rounded-2xl shadow-sm
+                       border p-6 sticky top-6">
+
+                <h2 class="text-xl font-bold text-gray-800 mb-6">
+                    Order Summary
+                </h2>
+
+                <!-- Products -->
+
+                <div class="space-y-4">
+
+                    {% for item in cart_items %}
+
+                    <div class="flex gap-3">
+
+                        <!-- Image -->
+
+                        <img
+                            src="{{ item.product.image.url }}"
+                            alt="{{ item.product.name }}"
+                            class="w-16 h-16
+                                   object-cover rounded-lg
+                                   flex-shrink-0">
+
+                        <!-- Product -->
+
+                        <div class="flex-1">
+
+                            <h3 class="text-sm font-semibold
+                                       text-gray-800">
+
+                                {{ item.product.name }}
+
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+
+                                Qty: {{ item.quantity }}
+
+                            </p>
+
+                        </div>
+
+                        <!-- Subtotal -->
+
+                        <div class="text-sm font-semibold
+                                    text-gray-800">
+
+                            ৳{{ item.subtotal }}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <!-- Divider -->
+
+                <div class="border-t my-6"></div>
+
+                <!-- Subtotal -->
+
+                <div class="flex justify-between
+                            text-gray-600 mb-3">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        ৳{{ subtotal }}
+                    </span>
+
+                </div>
+
+                <!-- Shipping -->
+
+                <div class="flex justify-between
+                            text-gray-600 mb-3">
+
+                    <span>
+                        Shipping Charge
+                    </span>
+
+                    <span>
+                        ৳{{ shipping_charge }}
+                    </span>
+
+                </div>
+
+                <!-- Total -->
+
+                <div class="border-t pt-4 mt-4">
+
+                    <div class="flex justify-between
+                                items-center">
+
+                        <span class="text-lg font-bold
+                                     text-gray-800">
+
+                            Total
+
+                        </span>
+
+                        <span class="text-2xl font-bold
+                                     text-indigo-600">
+
+                            ৳{{ total_amount }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- Place Order -->
+
+                {% if customer %}
+
+                <form
+                    method="POST"
+                    action="{% url 'place_order' %}">
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="w-full mt-6
+               bg-indigo-600
+               hover:bg-indigo-700
+               text-white
+               font-semibold
+               py-3
+               rounded-xl
+               transition">
+
+                        Place Order 🛍️
+
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+                <!-- Back to Cart -->
+
+                <a
+                    href="{% url 'cart' %}"
+                    class="block text-center
+                           mt-4
+                           text-indigo-600
+                           hover:text-indigo-700
+                           font-medium">
+
+                    ← Back to Cart
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
