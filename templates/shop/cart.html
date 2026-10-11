@@ -1,4 +1,5 @@
 {% extends "shop/base.html" %}
+{% load static %}
 
 {% block title %}
 My Cart - Shop Online BD
@@ -39,7 +40,7 @@ My Cart - Shop Online BD
                 <div class="w-full sm:w-32 h-32 flex-shrink-0">
 
                     <img
-                        src="{{ item.product.image.url }}"
+                        src="{% static 'shop/images/' %}{{ item.product.image.name }}"
                         alt="{{ item.product.name }}"
                         class="w-full h-full object-cover rounded-xl">
 

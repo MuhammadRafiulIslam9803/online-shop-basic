@@ -1,4 +1,5 @@
 {% extends "shop/base.html" %}
+{% load static %}
 
 {% block title %}
 Checkout - Shop Online BD
@@ -237,7 +238,7 @@ Checkout - Shop Online BD
                         <!-- Image -->
 
                         <img
-                            src="{{ item.product.image.url }}"
+                            src="{% static 'shop/images/' %}{{ item.product.image.name }}"
                             alt="{{ item.product.name }}"
                             class="w-16 h-16
                                    object-cover rounded-lg
