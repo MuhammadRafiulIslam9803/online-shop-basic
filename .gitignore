@@ -1,8 +1,7 @@
 
 .env
 data_backup.json
-db.sqlite3
-media/
+db.sqlite31
 staticfiles/
 __pycache__/
 *.py[cod]
