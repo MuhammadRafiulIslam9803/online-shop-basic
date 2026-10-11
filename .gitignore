@@ -1,0 +1,10 @@
+
+.env
+data_backup.json
+db.sqlite3
+media/
+staticfiles/
+__pycache__/
+*.py[cod]
+venv/
+env/
